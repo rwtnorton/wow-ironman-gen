@@ -5,8 +5,8 @@ toons suitable for the Wow Ironman Challenge.
 
 ## Usage
 
-  $ cd dir/where/clj_wow_ironman_gen/lives/
-  $ lein run
+    $ cd dir/where/clj_wow_ironman_gen/lives/
+    $ lein run
 
 ## License
 
