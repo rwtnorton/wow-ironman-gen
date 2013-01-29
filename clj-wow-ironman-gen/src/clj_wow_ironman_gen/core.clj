@@ -17,6 +17,7 @@
             n (count coll)
             which (mod r n)]
         (nth coll which)))))
+
 (def sample (sample-gen))
 
 (def classes-for-race
@@ -38,21 +39,27 @@
    })
 
 (defn races [] (keys classes-for-race))
+
 (defn race [] (sample (races)))
-(defn cls [race] (sample (classes-for-race race)))
+
+(defn cls [race] (sample (race classes-for-race)))
+
 (defn gender [] (sample [:female, :male]))
+
 (defn faction [] (sample [:horde, :alliance]))
+
 (defn toon []
   (let [r (race)
         c (cls r)
         g (gender)
         f (faction)]
     {:race r, :cls c, :gender g, :faction f}))
+
 (defn present-toon [toon]
   (let [{r :race, c :cls, g :gender, f :faction} toon
-        attrs (if (= r :pandaren) (list g f r c) (list g r c))]
-    (apply str (interpose " "
-                          (map (fn [s] (.substring s 1))
-                               (map str attrs))))))
+        attrs (if (= r :pandaren) (list g f r c) (list g r c))
+        attr->str #(subs (str %) 1)]
+    (clojure.string/join " " (map attr->str attrs))))
+
 (defn -main [& args]
   (println (present-toon (toon))))
