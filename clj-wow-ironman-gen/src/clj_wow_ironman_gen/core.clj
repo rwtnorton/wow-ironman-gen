@@ -42,7 +42,7 @@
 
 (defn race [] (sample (races)))
 
-(defn cls [race] (sample (race classes-for-race)))
+(defn cls [race] (sample (classes-for-race race)))
 
 (defn gender [] (sample [:female, :male]))
 
