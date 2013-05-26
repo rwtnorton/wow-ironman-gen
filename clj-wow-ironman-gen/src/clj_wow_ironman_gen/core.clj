@@ -10,32 +10,26 @@
 ;; No death knights.
 ;; warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
-(defn sample-gen []
-  (let [rand (java.util.Random.)]
-    (fn [coll]
-      (let [r (.nextInt rand)
-            n (count coll)
-            which (mod r n)]
-        (nth coll which)))))
-
-(def sample (sample-gen))
+(defn sample [coll]
+  (rand-nth (seq coll)))
 
 (def classes-for-race
   {
-   :human [:warrior :paladin :hunter :rogue :monk :mage :warlock :priest],
-   :night_elf [:warrior :hunter :rogue :druid :monk :mage :priest],
-   :dwarf [:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock
-           :priest],
-   :gnome [:warrior :rogue :monk :mage :warlock :priest]
-   :draenei [:warrior :paladin :hunter :shaman :monk :mage :priest],
-   :worgen [:warrior :hunter :druid :rogue :mage :warlock :priest],
-   :pandaren [:warrior :hunter :shaman :rogue :monk :mage :priest],
-   :orc [:warrior :hunter :shaman :rogue :monk :mage :warlock],
-   :troll [:warrior :hunter :shaman :druid :rogue :monk :mage :warlock :priest],
-   :forsaken [:warrior :hunter :rogue :monk :mage :warlock :priest],
-   :tauren [:warrior :paladin :hunter :shaman :druid :monk :priest],
-   :blood_elf [:warrior :paladin :hunter :rogue :monk :mage :warlock :priest],
-   :goblin [:warrior :hunter :shaman :rogue :mage :warlock :priest],
+   :human #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
+   :night_elf #{:warrior :hunter :rogue :druid :monk :mage :priest},
+   :dwarf #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock
+            :priest},
+   :gnome #{:warrior :rogue :monk :mage :warlock :priest}
+   :draenei #{:warrior :paladin :hunter :shaman :monk :mage :priest},
+   :worgen #{:warrior :hunter :druid :rogue :mage :warlock :priest},
+   :pandaren #{:warrior :hunter :shaman :rogue :monk :mage :priest},
+   :orc #{:warrior :hunter :shaman :rogue :monk :mage :warlock},
+   :troll #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock
+            :priest},
+   :forsaken #{:warrior :hunter :rogue :monk :mage :warlock :priest},
+   :tauren #{:warrior :paladin :hunter :shaman :druid :monk :priest},
+   :blood_elf #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
+   :goblin #{:warrior :hunter :shaman :rogue :mage :warlock :priest},
    })
 
 (defn races [] (keys classes-for-race))
@@ -44,9 +38,9 @@
 
 (defn cls [race] (sample (classes-for-race race)))
 
-(defn gender [] (sample [:female, :male]))
+(defn gender [] (sample #{:female :male}))
 
-(defn faction [] (sample [:horde, :alliance]))
+(defn faction [] (sample #{:horde :alliance}))
 
 (defn toon []
   (let [r (race)
