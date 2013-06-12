@@ -10,5 +10,5 @@ All programs should:
     However, pandaren may choose either faction, so:
        <gender> <faction> <race> <class>
     a.) Each token should appear in lowercase.
-    a.) Compound race names like Night Elf should use underscore
+    b.) Compound race names like Night Elf should use underscore
         as token separator (i.e., night_elf).
