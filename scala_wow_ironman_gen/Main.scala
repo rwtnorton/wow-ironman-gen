@@ -100,8 +100,8 @@ object Toon {
 // $ scalac scala_wow_ironman_gen/Main.scala
 // $ scala -cp . scala_wow_ironman_gen.Main
 
-object Main extends App {
-  override def main(args: Array[String]) = {
+object Main {
+  def main(args: Array[String]) {
     println(Toon.generateRandom)
   }
 }
