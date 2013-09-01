@@ -16,27 +16,35 @@ object Sampler {
   def sample[T](vs: Seq[T]): T = Random.shuffle(vs).head
 }
 
-object Cls extends Enumeration {
+trait SeqableEnum extends Enumeration {
+  def toSeq = values.toSeq
+}
+
+trait SamplableEnum extends SeqableEnum {
+  def sample = Sampler.sample[Value](toSeq)
+}
+
+object Cls extends SamplableEnum {
   type Cls = Value
   val warrior, paladin, hunter, shaman, druid,
     rogue, monk, mage, warlock, priest = Value
 }
 import Cls._
 
-object Race extends Enumeration {
+object Race extends SamplableEnum {
   type Race = Value
   val human, night_elf, dwarf, gnome, draenei, worgen, pandaren,
     orc, troll, forsaken, tauren, blood_elf, goblin = Value
 }
 import Race._
 
-object Gender extends Enumeration {
+object Gender extends SamplableEnum {
   type Gender = Value
   val female, male = Value
 }
 import Gender._
 
-object Faction extends Enumeration {
+object Faction extends SamplableEnum {
   type Faction = Value
   val horde, alliance = Value
 }
@@ -80,10 +88,10 @@ case class Toon(
 
 object Toon {
   def generateRandom: Toon = {
-    val r = Sampler.sample(Race.values.toSeq)
+    val r = Race.sample
     val c = Sampler.sample(ClsMapper(r).toSeq)
-    val g = Sampler.sample(Gender.values.toSeq)
-    val f = Sampler.sample(Faction.values.toSeq)
+    val g = Gender.sample
+    val f = Faction.sample
     Toon(r, c, g, f)
   }
 }
