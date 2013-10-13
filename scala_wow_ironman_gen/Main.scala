@@ -70,18 +70,20 @@ object ClsMapper {
 }
 
 case class Toon(
-  val race: Race,
-  val cls: Cls,
-  val gender: Gender,
-  val faction: Faction) {
+  race: Race,
+  cls: Cls,
+  gender: Gender,
+  faction: Faction) {
 
   val shouldShowFaction = race == pandaren
 
-  val showableAttrs: Array[String] =
+  private[this] val attrs =
     if (shouldShowFaction)
-      Array(gender, faction, race, cls) map (_.toString)
+      List(gender, faction, race, cls)
     else
-      Array(gender, race, cls) map (_.toString)
+      List(gender, race, cls)
+
+  val showableAttrs: Seq[String] = attrs map (_.toString())
 
   override def toString(): String = showableAttrs mkString " "
 }
@@ -101,7 +103,7 @@ object Toon {
 // $ scala -cp . scala_wow_ironman_gen.Main
 
 object Main {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println(Toon.generateRandom)
   }
 }
