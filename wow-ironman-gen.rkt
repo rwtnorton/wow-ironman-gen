@@ -14,21 +14,8 @@
   '("warrior" "paladin" "hunter" "shaman" "druid"
     "rogue" "monk" "mage" "warlock" "priest"))
 
-(define (make-toon race class gender faction)
-  (lambda (accessor) (accessor race class gender faction)))
+(struct toon (race class gender faction) #:transparent)
 
-(define (toon-race toon)
-  (let ((race-accessor (lambda (r c g f) r)))
-    (toon race-accessor)))
-(define (toon-class toon)
-  (let ((class-accessor (lambda (r c g f) c)))
-    (toon class-accessor)))
-(define (toon-gender toon)
-  (let ((gender-accessor (lambda (r c g f) g)))
-    (toon gender-accessor)))
-(define (toon-faction toon)
-  (let ((faction-accessor (lambda (r c g f) f)))
-    (toon faction-accessor)))
 (define (toon-dual-faction? toon) (equal? (toon-race toon) "pandaren"))
 
 (define (sample lst)
@@ -65,7 +52,7 @@
         (g (random-gender))
         (f (random-faction)))
     (let ((c (random-class r)))
-      (make-toon r c g f))))
+      (toon r c g f))))
 (define (format-toon toon)
   (let ((r (toon-race toon))
         (c (toon-class toon))
