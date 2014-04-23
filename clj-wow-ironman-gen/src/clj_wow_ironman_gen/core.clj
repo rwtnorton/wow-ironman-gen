@@ -1,4 +1,5 @@
-(ns clj-wow-ironman-gen.core)
+(ns clj-wow-ironman-gen.core
+  (:gen-class))
 
 ;;
 ;; Randomly generate a World of Warcraft race/class/gender combo for the

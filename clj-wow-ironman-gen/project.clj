@@ -3,6 +3,7 @@
   :url "https://github.com/rwtnorton/wow-ironman-gen/clj_wow_ironman_gen"
   :license {:name "GNU Public License v3"
             :url "https://www.gnu.org/licenses/gpl"}
-  :dependencies [[org.clojure/clojure "1.5.1"]]
+  :dependencies [[org.clojure/clojure "1.6.0"]]
   :plugins [[lein-swank "1.4.4"]]
+  :aot [clj-wow-ironman-gen.core]
   :main clj-wow-ironman-gen.core)
