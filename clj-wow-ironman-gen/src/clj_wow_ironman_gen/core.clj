@@ -14,41 +14,41 @@
 (defn sample [coll]
   (rand-nth (seq coll)))
 
-(def classes-for-race
+(def by-race
   {
-   :human     #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
-   :night_elf #{:warrior :hunter :rogue :druid :monk :mage :priest},
-   :dwarf     #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock
-                :priest},
-   :gnome     #{:warrior :rogue :monk :mage :warlock :priest}
-   :draenei   #{:warrior :paladin :hunter :shaman :monk :mage :priest},
-   :worgen    #{:warrior :hunter :druid :rogue :mage :warlock :priest},
-   :pandaren  #{:warrior :hunter :shaman :rogue :monk :mage :priest},
-   :orc       #{:warrior :hunter :shaman :rogue :monk :mage :warlock},
-   :troll     #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock
-                :priest},
-   :forsaken  #{:warrior :hunter :rogue :monk :mage :warlock :priest},
-   :tauren    #{:warrior :paladin :hunter :shaman :druid :monk :priest},
-   :blood_elf #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
-   :goblin    #{:warrior :hunter :shaman :rogue :mage :warlock :priest},
+   :human     {:factions #{:alliance}
+               :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
+   :night_elf {:factions #{:alliance}
+               :classes  #{:warrior :hunter :rogue :druid :monk :mage :priest}}
+   :dwarf     {:factions #{:alliance}
+               :classes  #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock :priest}}
+   :gnome     {:factions #{:alliance}
+               :classes  #{:warrior :rogue :monk :mage :warlock :priest}}
+   :draenei   {:factions #{:alliance}
+               :classes  #{:warrior :paladin :hunter :shaman :monk :mage :priest}}
+   :worgen    {:factions #{:alliance}
+               :classes  #{:warrior :hunter :druid :rogue :mage :warlock :priest}}
+   :pandaren  {:factions #{:alliance :horde}
+               :classes  #{:warrior :hunter :shaman :rogue :monk :mage :priest}}
+   :orc       {:factions #{:horde}
+               :classes  #{:warrior :hunter :shaman :rogue :monk :mage :warlock}}
+   :troll     {:factions #{:horde}
+               :classes  #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock :priest}}
+   :forsaken  {:factions #{:horde}
+               :classes  #{:warrior :hunter :rogue :monk :mage :warlock :priest}}
+   :tauren    {:factions #{:horde}
+               :classes  #{:warrior :paladin :hunter :shaman :druid :monk :priest}}
+   :blood_elf {:factions #{:horde}
+               :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
+   :goblin    {:factions #{:horde}
+               :classes  #{:warrior :hunter :shaman :rogue :mage :warlock :priest}}
    })
 
+(def classes-for-race
+  (into {} (map (fn [[r {vs :classes}]] [r vs]) (seq by-race))))
+
 (def factions-for-race
-  {
-   :human     #{:alliance},
-   :night_elf #{:alliance},
-   :dwarf     #{:alliance},
-   :gnome     #{:alliance},
-   :draenei   #{:alliance},
-   :worgen    #{:alliance},
-   :pandaren  #{:alliance :horde},
-   :orc       #{:horde},
-   :troll     #{:horde},
-   :forsaken  #{:horde},
-   :tauren    #{:horde},
-   :blood_elf #{:horde},
-   :goblin    #{:horde},
-   })
+  (into {} (map (fn [[r {vs :factions}]] [r vs]) (seq by-race))))
 
 (defn races [] (keys classes-for-race))
 
