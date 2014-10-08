@@ -16,21 +16,38 @@
 
 (def classes-for-race
   {
-   :human #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
+   :human     #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
    :night_elf #{:warrior :hunter :rogue :druid :monk :mage :priest},
-   :dwarf #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock
-            :priest},
-   :gnome #{:warrior :rogue :monk :mage :warlock :priest}
-   :draenei #{:warrior :paladin :hunter :shaman :monk :mage :priest},
-   :worgen #{:warrior :hunter :druid :rogue :mage :warlock :priest},
-   :pandaren #{:warrior :hunter :shaman :rogue :monk :mage :priest},
-   :orc #{:warrior :hunter :shaman :rogue :monk :mage :warlock},
-   :troll #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock
-            :priest},
-   :forsaken #{:warrior :hunter :rogue :monk :mage :warlock :priest},
-   :tauren #{:warrior :paladin :hunter :shaman :druid :monk :priest},
+   :dwarf     #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock
+                :priest},
+   :gnome     #{:warrior :rogue :monk :mage :warlock :priest}
+   :draenei   #{:warrior :paladin :hunter :shaman :monk :mage :priest},
+   :worgen    #{:warrior :hunter :druid :rogue :mage :warlock :priest},
+   :pandaren  #{:warrior :hunter :shaman :rogue :monk :mage :priest},
+   :orc       #{:warrior :hunter :shaman :rogue :monk :mage :warlock},
+   :troll     #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock
+                :priest},
+   :forsaken  #{:warrior :hunter :rogue :monk :mage :warlock :priest},
+   :tauren    #{:warrior :paladin :hunter :shaman :druid :monk :priest},
    :blood_elf #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest},
-   :goblin #{:warrior :hunter :shaman :rogue :mage :warlock :priest},
+   :goblin    #{:warrior :hunter :shaman :rogue :mage :warlock :priest},
+   })
+
+(def factions-for-race
+  {
+   :human     #{:alliance},
+   :night_elf #{:alliance},
+   :dwarf     #{:alliance},
+   :gnome     #{:alliance},
+   :draenei   #{:alliance},
+   :worgen    #{:alliance},
+   :pandaren  #{:alliance :horde},
+   :orc       #{:horde},
+   :troll     #{:horde},
+   :forsaken  #{:horde},
+   :tauren    #{:horde},
+   :blood_elf #{:horde},
+   :goblin    #{:horde},
    })
 
 (defn races [] (keys classes-for-race))
@@ -41,20 +58,21 @@
 
 (defn gender [] (sample #{:female :male}))
 
-(defn faction [] (sample #{:horde :alliance}))
+(defn faction
+  ([] (sample #{:horde :alliance}))
+  ([r] (sample (factions-for-race r))))
 
 (defn toon []
   (let [r (race)
         c (cls r)
         g (gender)
-        f (faction)]
+        f (faction r)]
     {:race r, :cls c, :gender g, :faction f}))
 
 (defn present-toon [toon]
   (let [{r :race, c :cls, g :gender, f :faction} toon
-        attrs (if (= r :pandaren) (list g f r c) (list g r c))
-        attr->str #(subs (str %) 1)]
-    (clojure.string/join " " (map attr->str attrs))))
+        attrs (filter identity [g (when (= r :pandaren) f) r c])]
+    (clojure.string/join " " (map name attrs))))
 
 (defn -main [& args]
   (println (present-toon (toon))))
