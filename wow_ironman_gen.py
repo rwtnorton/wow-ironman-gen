@@ -13,13 +13,6 @@ import string
 # # No death knights.
 # warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
-def sample(lst):
-    """sample(lst) -> Random member of list lst.
-
-    Really just present for convenience.
-    """
-    return random.sample(lst, 1)[0]
-
 CLASSES_FOR_RACE = {
     "human": ("warrior", "paladin", "hunter", "rogue", "monk", "mage",
               "warlock", "priest"),
@@ -44,7 +37,7 @@ CLASSES_FOR_RACE = {
     "blood_elf": ("warrior", "paladin", "hunter", "rogue", "monk", "mage",
                   "warlock", "priest"),
     "goblin": ("warrior", "hunter", "shaman", "rogue", "mage", "warlock",
-               "priest")
+               "priest"),
 }
 
 def races():
@@ -57,16 +50,16 @@ def factions():
     return ("alliance", "horde")
 
 def random_race():
-    return sample(races())
+    return random.choice(races())
 
 def random_class_for_race(race):
-    return sample(CLASSES_FOR_RACE[race])
+    return random.choice(CLASSES_FOR_RACE[race])
 
 def random_gender():
-    return sample(genders())
+    return random.choice(genders())
 
 def random_faction():
-    return sample(factions())
+    return random.choice(factions())
 
 
 class toon(object):
