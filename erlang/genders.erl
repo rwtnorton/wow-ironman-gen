@@ -15,6 +15,9 @@ loop() ->
     receive
         {From, random} ->
             From ! {self(), random()},
+            loop();
+        {From, all} ->
+            From ! {self(), as_list()},
             loop()
     end.
 
