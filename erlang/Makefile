@@ -5,7 +5,7 @@
 
 ERL = erl -boot start_clean
 
-MODS = sample genders races
+MODS = sample genders races classes
 
 current_dir = $(shell pwd)
 
