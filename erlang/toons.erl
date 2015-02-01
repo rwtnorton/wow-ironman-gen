@@ -15,15 +15,15 @@ random() ->
 raw_to_str(Fmt, Args) ->
     lists:flatten(io_lib:format(Fmt, Args)).
 
-to_str(#{class := Class
+to_str(#{class   := Class
         ,faction := Faction
-        ,gender := Gender
-        ,race := pandaren}) ->
+        ,gender  := Gender
+        ,race    := pandaren}) ->
     raw_to_str("~p ~p ~p ~p", [Gender, Faction, pandaren, Class]);
-to_str(#{class := Class
+to_str(#{class   := Class
         ,faction := _
-        ,gender := Gender
-        ,race := Race}) ->
+        ,gender  := Gender
+        ,race    := Race}) ->
     raw_to_str("~p ~p ~p", [Gender, Race, Class]).
 
 start() ->

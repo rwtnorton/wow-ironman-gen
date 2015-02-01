@@ -2,18 +2,16 @@
 -export([as_list/0, random/0, random/1, for_race/1, start/0, loop/0, rpc/2]).
 
 as_list() ->
-    [
-     warrior,
-     paladin,
-     hunter,
-     shaman,
-     druid,
-     rogue,
-     monk,
-     mage,
-     warlock,
-     priest
-    ].
+    [warrior
+    ,paladin
+    ,hunter
+    ,shaman
+    ,druid
+    ,rogue
+    ,monk
+    ,mage
+    ,warlock
+    ,priest].
 
 random() ->
     sample:from_list(as_list()).
