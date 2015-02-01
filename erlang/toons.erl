@@ -35,6 +35,7 @@ start() ->
     spawn(toons, loop, []).
 
 loop() ->
+    set_seed(),
     receive
         {From, {random}} ->
             From ! {self(), random()},
@@ -50,3 +51,7 @@ rpc(Pid, Request) ->
         {Pid, Response} ->
             Response
     end.
+
+set_seed() ->
+    {A1, A2, A3} = now(),
+    random:seed(A1, A2, A3).

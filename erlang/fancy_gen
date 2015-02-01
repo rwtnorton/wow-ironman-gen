@@ -1,0 +1,7 @@
+#!/usr/bin/env escript
+-import(toons, []).
+
+main(_) ->
+    Server = toons:start(),
+    Toon = toons:rpc(Server, {random}),
+    io:format("~s~n", [toons:to_str(Toon)]).
