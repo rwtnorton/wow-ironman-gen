@@ -1,5 +1,4 @@
 -module(classes).
--import(sample, []).
 -export([as_list/0, random/0, random/1, for_race/1, start/0, loop/0, rpc/2]).
 
 as_list() ->

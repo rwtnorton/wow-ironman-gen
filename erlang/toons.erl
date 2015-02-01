@@ -1,9 +1,4 @@
 -module(toons).
--import(sample, []).
--import(genders, []).
--import(factions, []).
--import(races, []).
--import(classes, []).
 -export([random/0, random/1, to_str/1, start/0, loop/0, rpc/2]).
 
 random(Race) ->

@@ -1,5 +1,4 @@
 #!/usr/bin/env escript
--import(toons, []).
 
 main(_) ->
     Server = toons:start(),

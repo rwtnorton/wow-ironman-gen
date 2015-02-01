@@ -1,5 +1,4 @@
 -module(races).
--import(sample, []).
 -export([as_list/0, random/0, start/0, loop/0, rpc/2]).
 
 as_list() ->

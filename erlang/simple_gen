@@ -1,5 +1,4 @@
 #!/usr/bin/env escript
--import(toons, []).
 
 set_seed() ->
     {A1, A2, A3} = now(),
