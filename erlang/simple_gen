@@ -1,0 +1,10 @@
+#!/usr/bin/env escript
+-import(toons, []).
+
+set_seed() ->
+    {A1, A2, A3} = now(),
+    random:seed(A1, A2, A3).
+
+main(_) ->
+    set_seed(),
+    io:format("~s~n", [toons:to_str(toons:random())]).
