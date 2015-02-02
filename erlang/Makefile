@@ -5,14 +5,19 @@
 
 ERL = erl -boot start_clean
 
-MODS = sample genders races classes factions toons
+MODS = sample genders races classes factions toons \
+       genders_tests
 
 current_dir = $(shell pwd)
+erl_run = ${ERL} -pa ${current_dir}
 
 all: compile
-	${ERL} -pa ${current_dir}
+	${erl_run}
 
 compile: ${MODS:%=%.beam}
+
+tests: compile
+	${erl_run} -noshell -s genders_tests test -s init stop
 
 clean:
 	rm -rf *.beam erl_crash.dump
