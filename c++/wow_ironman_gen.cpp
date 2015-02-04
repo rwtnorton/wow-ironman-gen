@@ -13,13 +13,9 @@ namespace wow {
     Gender() {}
     Gender(Kind k) : kind(k) {}
     const string to_s() const {
-      if (this->kind == Kind::female) {
-        return "female";
-      }
-      if (this->kind == Kind::male) {
-        return "male";
-      }
-      return "dunno";
+      return (this->kind == Kind::female) ? "female"
+           : (this->kind == Kind::male)   ? "male"
+           :                                "dunno";
     }
   };
   std::ostream& operator<<(std::ostream& o, const Gender& g) {
