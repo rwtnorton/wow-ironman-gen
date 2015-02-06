@@ -7,32 +7,26 @@ using namespace std;
 
 namespace wow {
 
-  struct Gender {
-    enum class Kind { female, male };
-    Kind kind;
-    Gender() {}
-    Gender(Kind k) : kind(k) {}
-    const string to_s() const {
-      return (this->kind == Kind::female) ? "female"
-           : (this->kind == Kind::male)   ? "male"
-           :                                "dunno";
+  enum class Gender { female, male };
+  const vector<Gender> genders = { Gender::female, Gender::male };
+  const string to_string(const Gender& g) {
+    switch (g) {
+    case Gender::female: return "female";
+    case Gender::male:   return "male";
+    default:             return "dunno";
     }
-  };
-  ostream& operator<<(ostream& o, const Gender& g) {
-    return o << g.to_s();
   }
-  static const Gender Male = Gender(Gender::Kind::male);
-  static const Gender Female = Gender(Gender::Kind::female);
+  ostream& operator<<(ostream& o, const Gender& g) {
+    return o << to_string(g);
+  }
 
 };
 
 int main() {
-  cout << "ohai" << endl;
-  wow::Gender dude = wow::Male;
-  wow::Gender gal = wow::Female;
-  cout << dude.to_s() << endl;
-  cout << gal.to_s() << endl;
-  cout << dude << endl;
-  cout << gal << endl;
+  cout << wow::Gender::female << endl;
+  cout << wow::Gender::male << endl;
+  for (int i = 0; i < wow::genders.size(); i++) {
+    cout << i << ": " << wow::genders[i] << endl;
+  }
   return 0;
 }
