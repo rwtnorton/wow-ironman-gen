@@ -18,11 +18,12 @@ namespace wow {
            :                                "dunno";
     }
   };
-  std::ostream& operator<<(std::ostream& o, const Gender& g) {
+  ostream& operator<<(ostream& o, const Gender& g) {
     return o << g.to_s();
   }
   static const Gender Male = Gender(Gender::Kind::male);
   static const Gender Female = Gender(Gender::Kind::female);
+
 };
 
 int main() {
