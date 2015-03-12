@@ -120,14 +120,17 @@ classesForRace = Map.insert Human    humanClasses
                . Map.insert Goblin   goblinClasses
                $ Map.empty
 
-chooseRace = randomElement [minBound :: Race .. maxBound :: Race]
+enumerate :: (Enum a, Bounded a) => [a]
+enumerate = [minBound .. maxBound]
+
+chooseRace = randomElement (enumerate::[Race])
 
 chooseClass race = randomElement cs
   where cs = Set.toList $ classesForRace Map.! race
 
-chooseGender = randomElement [minBound :: Gender .. maxBound :: Gender]
+chooseGender = randomElement (enumerate::[Gender])
 
-chooseFaction = randomElement [minBound :: Faction .. maxBound :: Faction]
+chooseFaction = randomElement (enumerate::[Faction])
 
 racialFaction race =
   case race of
