@@ -1,6 +1,0 @@
-*.pyc
-c/bin/*
-go/wow-ironman-gen
-scala/classes/*
-java/classes/*
-clojure/*/target/*
