@@ -1,0 +1,9 @@
+[package]
+
+name = "wow_ironman_gen"
+version = "0.0.1"
+authors = ["Richard W. Norton <rwtnorton@gmail.com>"]
+
+[[bin]]
+
+name = "wow_ironman_gen"
