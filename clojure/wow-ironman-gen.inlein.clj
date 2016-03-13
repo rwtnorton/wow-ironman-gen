@@ -4,6 +4,8 @@
 
 '{:dependencies [[org.clojure/clojure "1.8.0"]]}
 
+(require '[clojure.string :as str])
+
 ;;
 ;; Randomly generate a World of Warcraft race/class/gender combo for the
 ;; WoW Ironman Challenge.
@@ -18,8 +20,7 @@
   (rand-nth (seq coll)))
 
 (def by-race
-  {
-   :human     {:factions #{:alliance}
+  {:human     {:factions #{:alliance}
                :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
    :night_elf {:factions #{:alliance}
                :classes  #{:warrior :hunter :rogue :druid :monk :mage :priest}}
@@ -44,14 +45,20 @@
    :blood_elf {:factions #{:horde}
                :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
    :goblin    {:factions #{:horde}
-               :classes  #{:warrior :hunter :shaman :rogue :mage :warlock :priest}}
-   })
+               :classes  #{:warrior :hunter :shaman :rogue :mage :warlock :priest}}})
+
+(defn- *for-race [k [r m]]
+  [r (get m k)])
 
 (def classes-for-race
-  (into {} (map (fn [[r {vs :classes}]] [r vs]) (seq by-race))))
+  (->> (seq by-race)
+       (map (partial *for-race :classes))
+       (into {})))
 
 (def factions-for-race
-  (into {} (map (fn [[r {vs :factions}]] [r vs]) (seq by-race))))
+  (->> (seq by-race)
+       (map (partial *for-race :factions))
+       (into {})))
 
 (defn races [] (keys classes-for-race))
 
@@ -72,11 +79,11 @@
         f (faction r)]
     {:race r, :cls c, :gender g, :faction f}))
 
-(defn present-toon [toon]
+(defn toon->str [toon]
   (let [{r :race, c :cls, g :gender, f :faction} toon
         attrs (filter identity [g (when (= r :pandaren) f) r c])]
-    (clojure.string/join " " (map name attrs))))
+    (str/join " " (map name attrs))))
 
-(println (present-toon (toon)))
-
-
+(->> (toon)
+     toon->str
+     println)
