@@ -4,7 +4,8 @@
 
 '{:dependencies [[org.clojure/clojure "1.8.0"]]}
 
-(require '[clojure.string :as str])
+(require '[clojure.string :as str]
+         '[clojure.set :as set])
 
 ;;
 ;; Randomly generate a World of Warcraft race/class/gender combo for the
@@ -47,6 +48,8 @@
    :goblin    {:factions #{:horde}
                :classes  #{:warrior :hunter :shaman :rogue :mage :warlock :priest}}})
 
+(def genders #{:female :male})
+
 (defn- *for-race [k [r m]]
   [r (get m k)])
 
@@ -60,30 +63,52 @@
        (map (partial *for-race :factions))
        (into {})))
 
-(defn races [] (keys classes-for-race))
+(defn gather-classes []
+  (->> races
+       (map classes-for-race)
+       (apply set/union)))
+(def classes (gather-classes))
 
-(defn race [] (sample (races)))
+(defn gather-races []
+  (keys classes-for-race))
+(def races (gather-races))
 
-(defn cls [race] (sample (classes-for-race race)))
+(defn gather-factions []
+  (->> races
+       (map factions-for-race)
+       (apply set/union)))
+(def factions (gather-factions))
 
-(defn gender [] (sample #{:female :male}))
+(defn sample-race []
+  (->> races sample))
 
-(defn faction
-  ([] (sample #{:horde :alliance}))
-  ([r] (sample (factions-for-race r))))
+(defn sample-class [race]
+  (->> race classes-for-race sample))
 
-(defn toon []
-  (let [r (race)
-        c (cls r)
-        g (gender)
-        f (faction r)]
-    {:race r, :cls c, :gender g, :faction f}))
+(defn sample-gender []
+  (sample genders))
 
-(defn toon->str [toon]
-  (let [{r :race, c :cls, g :gender, f :faction} toon
-        attrs (filter identity [g (when (= r :pandaren) f) r c])]
-    (str/join " " (map name attrs))))
+(defn sample-faction
+  ([]
+   (sample factions))
+  ([race]
+   (->> race factions-for-race sample)))
 
-(->> (toon)
+(defn sample-toon
+  ([]
+   (sample-toon (sample-race)))
+  ([race]
+   {:race race
+    :class (sample-class race)
+    :gender (sample-gender)
+    :faction (sample-faction race)}))
+
+(defmulti toon->str :race)
+(defmethod toon->str :pandaren [{:keys [race class gender faction]}]
+  (str/join " " (map name [gender faction race class])))
+(defmethod toon->str :default [{:keys [race class gender]}]
+  (str/join " " (map name [gender race class])))
+
+(->> (sample-toon)
      toon->str
      println)
