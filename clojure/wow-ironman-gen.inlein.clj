@@ -17,8 +17,11 @@
 ;; No death knights.
 ;; warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
-(defn sample [coll]
-  (rand-nth (seq coll)))
+(defmulti sample count)
+(defmethod sample 1 [coll]
+  (first coll))
+(defmethod sample :default [coll]
+  (->> coll (into []) rand-nth))
 
 (def by-race
   {:human     {:factions #{:alliance}
@@ -54,24 +57,24 @@
   [r (get m k)])
 
 (def classes-for-race
-  (->> (seq by-race)
+  (->> by-race
        (map (partial *for-race :classes))
        (into {})))
 
 (def factions-for-race
-  (->> (seq by-race)
+  (->> by-race
        (map (partial *for-race :factions))
        (into {})))
+
+(defn gather-races []
+  (keys classes-for-race))
+(def races (gather-races))
 
 (defn gather-classes []
   (->> races
        (map classes-for-race)
        (apply set/union)))
 (def classes (gather-classes))
-
-(defn gather-races []
-  (keys classes-for-race))
-(def races (gather-races))
 
 (defn gather-factions []
   (->> races
@@ -103,12 +106,18 @@
     :gender (sample-gender)
     :faction (sample-faction race)}))
 
-(defmulti toon->str (fn [{race :race}]
-                      (->> (factions-for-race race) count (> 1))))
-(defmethod toon->str true [{:keys [race class gender faction]}]
+(defn- faction-count [toon]
+  (->> toon :race factions-for-race count))
+
+(defmulti toon->str faction-count)
+(defmethod toon->str 2 [{:keys [race class gender faction]}]
   (str/join " " (map name [gender faction race class])))
-(defmethod toon->str :default [{:keys [race class gender]}]
+(defmethod toon->str 1 [{:keys [race class gender]}]
   (str/join " " (map name [gender race class])))
+(defmethod toon->str :default [toon]
+  (throw (ex-info "Unexpected faction count"
+                  {:toon toon
+                   :faction-count (faction-count toon)})))
 
 (->> (sample-toon)
      toon->str
