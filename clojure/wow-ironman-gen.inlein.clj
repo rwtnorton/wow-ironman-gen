@@ -103,8 +103,9 @@
     :gender (sample-gender)
     :faction (sample-faction race)}))
 
-(defmulti toon->str :race)
-(defmethod toon->str :pandaren [{:keys [race class gender faction]}]
+(defmulti toon->str (fn [{race :race}]
+                      (->> (factions-for-race race) count (> 1))))
+(defmethod toon->str true [{:keys [race class gender faction]}]
   (str/join " " (map name [gender faction race class])))
 (defmethod toon->str :default [{:keys [race class gender]}]
   (str/join " " (map name [gender race class])))
