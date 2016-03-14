@@ -67,7 +67,7 @@
        (into {})))
 
 (defn gather-races []
-  (keys classes-for-race))
+  (keys by-race))
 (def races (gather-races))
 
 (defn gather-classes []
@@ -83,10 +83,13 @@
 (def factions (gather-factions))
 
 (defn sample-race []
-  (->> races sample))
+  (sample races))
 
-(defn sample-class [race]
-  (->> race classes-for-race sample))
+(defn sample-class
+  ([]
+   (sample classes))
+  ([race]
+   (->> race classes-for-race sample)))
 
 (defn sample-gender []
   (sample genders))
