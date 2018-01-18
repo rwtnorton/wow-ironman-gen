@@ -5,34 +5,44 @@ defmodule WowIronmanGen do
   """
 
   def races do
-    [:human, :night_elf, :dwarf, :gnome, :draenei, :worgen, :pandaren,
-     :orc, :troll, :forsaken, :tauren, :blood_elf, :goblin]
+    [
+      :human,
+      :night_elf,
+      :dwarf,
+      :gnome,
+      :draenei,
+      :worgen,
+      :pandaren,
+      :orc,
+      :troll,
+      :forsaken,
+      :tauren,
+      :blood_elf,
+      :goblin
+    ]
   end
 
   # No death knights.
   def classes do
-    [:warrior, :paladin, :hunter, :shaman, :druid, :rogue,
-     :monk, :mage, :warlock, :priest]
+    [:warrior, :paladin, :hunter, :shaman, :druid, :rogue, :monk, :mage, :warlock, :priest]
   end
 
   def classes_for_race do
-    %{human: [:warrior, :paladin, :hunter, :rogue, :monk, :mage, :warlock, :priest],
+    %{
+      human: [:warrior, :paladin, :hunter, :rogue, :monk, :mage, :warlock, :priest],
       night_elf: [:warrior, :hunter, :rogue, :druid, :monk, :mage, :priest],
-      dwarf: [:warrior, :paladin, :hunter, :shaman, :rogue, :monk, :mage, :warlock,
-              :priest],
+      dwarf: [:warrior, :paladin, :hunter, :shaman, :rogue, :monk, :mage, :warlock, :priest],
       gnome: [:warrior, :rogue, :monk, :mage, :warlock, :priest],
       draenei: [:warrior, :paladin, :hunter, :shaman, :monk, :mage, :priest],
       worgen: [:warrior, :hunter, :druid, :rogue, :mage, :warlock, :priest],
       pandaren: [:warrior, :hunter, :shaman, :rogue, :monk, :mage, :priest],
       orc: [:warrior, :hunter, :shaman, :rogue, :monk, :mage, :warlock],
-      troll: [:warrior, :hunter, :shaman, :druid, :rogue, :monk, :mage, :warlock,
-              :priest],
+      troll: [:warrior, :hunter, :shaman, :druid, :rogue, :monk, :mage, :warlock, :priest],
       forsaken: [:warrior, :hunter, :rogue, :monk, :mage, :warlock, :priest],
       tauren: [:warrior, :paladin, :hunter, :shaman, :druid, :monk, :priest],
-      blood_elf: [:warrior, :paladin, :hunter, :rogue, :monk, :mage, :warlock,
-                  :priest],
-      goblin: [:warrior, :hunter, :shaman, :rogue, :mage, :warlock, :priest],
-     }
+      blood_elf: [:warrior, :paladin, :hunter, :rogue, :monk, :mage, :warlock, :priest],
+      goblin: [:warrior, :hunter, :shaman, :rogue, :mage, :warlock, :priest]
+    }
   end
 
   def genders, do: [:female, :male]
@@ -41,15 +51,12 @@ defmodule WowIronmanGen do
 
   def factions_for_race do
     [
-     generate_race_faction_map(
-       ~W[human night_elf dwarf gnome draenei worgen]a, [:alliance]
-     ),
-     generate_race_faction_map(
-       ~W[orc troll forsaken tauren blood_elf goblin]a, [:horde]
-     ),
-     generate_race_faction_map(
-       ~W[pandaren]a, ~W[alliance horde]a
-     ),
+      generate_race_faction_map(~W[human night_elf dwarf gnome draenei worgen]a, [:alliance]),
+      generate_race_faction_map(~W[orc troll forsaken tauren blood_elf goblin]a, [:horde]),
+      generate_race_faction_map(
+        ~W[pandaren]a,
+        ~W[alliance horde]a
+      )
     ]
     |> Enum.reduce(%{}, &Map.merge/2)
   end
@@ -61,19 +68,19 @@ defmodule WowIronmanGen do
   end
 
   def random_race do
-    races() |> Enum.random
+    races() |> Enum.random()
   end
 
   def random_class(race) do
-    classes_for_race()[race] |> Enum.random
+    classes_for_race()[race] |> Enum.random()
   end
 
   def random_gender do
-    genders() |> Enum.random
+    genders() |> Enum.random()
   end
 
   def random_faction(race) do
-    factions_for_race()[race] |> Enum.random
+    factions_for_race()[race] |> Enum.random()
   end
 
   def random_toon do
@@ -84,6 +91,7 @@ defmodule WowIronmanGen do
   def stringify_toon({g, f, r = :pandaren, c}) do
     "#{g} #{f} #{r} #{c}"
   end
+
   def stringify_toon({g, _f, r, c}) do
     "#{g} #{r} #{c}"
   end
