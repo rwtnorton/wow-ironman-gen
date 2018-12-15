@@ -26,6 +26,12 @@ fun <T> List<T>.sample(): T =
 
 fun <T> Set<T>.sample(): T = toList().sample()
 
+val camelCaseRegex = """([A-Z]?[a-z]+)""".toRegex()
+fun String.toSnakeCase() =
+    camelCaseRegex.findAll(this).toList().map {
+        it.groupValues.first().toLowerCase()
+    }.joinToString(separator = "_")
+
 fun classesForRace(race: Race): Set<WowClass> = when (race) {
     Race.Human -> setOf(
         WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Rogue,
@@ -90,18 +96,7 @@ enum class WowClass {
         fun randomForRace(race: Race) = classesForRace(race).sample()
     }
 
-    override fun toString() = when (this) {
-        Warrior -> "warrior"
-        Paladin -> "paladin"
-        Hunter -> "hunter"
-        Shaman -> "shaman"
-        Druid -> "druid"
-        Rogue -> "rogue"
-        Monk -> "monk"
-        Mage -> "mage"
-        Warlock -> "warlock"
-        Priest -> "priest"
-    }
+    override fun toString() = name.toLowerCase()
 }
 
 enum class Race {
@@ -123,21 +118,7 @@ enum class Race {
         fun random() = values().toList().sample()
     }
 
-    override fun toString() = when (this) {
-        Human -> "human"
-        NightElf -> "night_elf"
-        Dwarf -> "dwarf"
-        Gnome -> "gnome"
-        Draenei -> "draenei"
-        Worgen -> "worgen"
-        Pandaren -> "pandaren"
-        Orc -> "orc"
-        Troll -> "troll"
-        Forsaken -> "forsaken"
-        Tauren -> "tauren"
-        BloodElf -> "blood_elf"
-        Goblin -> "goblin"
-    }
+    override fun toString() = name.toSnakeCase()
 }
 
 enum class Faction {
@@ -147,10 +128,7 @@ enum class Faction {
         fun random() = values().toList().sample()
     }
 
-    override fun toString() = when (this) {
-        Horde -> "horde"
-        Alliance -> "alliance"
-    }
+    override fun toString() = name.toLowerCase()
 }
 
 enum class Gender {
@@ -160,10 +138,7 @@ enum class Gender {
         fun random() = values().toList().sample()
     }
 
-    override fun toString() = when (this) {
-        Female -> "female"
-        Male -> "male"
-    }
+    override fun toString() = name.toLowerCase()
 }
 
 data class Toon(
