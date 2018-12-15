@@ -19,30 +19,26 @@
 
 (deftest gender-test
   (testing "gender is female or male"
-    (let [g (gender)]
-      (is (or (= g :female)
-              (= g :male))))))
+    (is (#{:female :male} (gender)))))
 
 (deftest faction-test
   (testing "faction is horde or ... alliance, psshh"
-    (let [f (faction)]
-      (is (or (= f :horde)
-              (= f :alliance))))))
+    (is (#{:horde :alliance} (faction)))))
 
 (deftest pandaren-present-toon-has-faction
   (testing "pandaren toons should have faction in present-toon"
-    (let [t {:race :pandaren,
-             :cls :monk,
-             :gender :female,
+    (let [t {:race    :pandaren
+             :cls     :monk
+             :gender  :female
              :faction :horde}]
       (is (= (present-toon t)
              "female horde pandaren monk")))))
 
 (deftest non-pandaren-present-toon-lacks-faction
   (testing "non-pandaren toons should lack faction in present-toon"
-    (let [t {:race :tauren,
-             :cls :hunter,
-             :gender :female,
+    (let [t {:race    :tauren
+             :cls     :hunter
+             :gender  :female
              :faction :horde}]
       (is (= (present-toon t)
              "female tauren hunter")))))
