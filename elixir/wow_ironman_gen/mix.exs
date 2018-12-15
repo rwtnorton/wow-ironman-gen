@@ -2,13 +2,15 @@ defmodule WowIronmanGen.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :wow_ironman_gen,
-     version: "0.1.0",
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps(),
-     escript: escript()]
+    [
+      app: :wow_ironman_gen,
+      version: "0.1.0",
+      elixir: "~> 1.4",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+      escript: escript()
+    ]
   end
 
   # Configuration for the OTP application
