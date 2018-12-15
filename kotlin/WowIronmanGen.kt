@@ -1,7 +1,6 @@
-package wow_ironman_gen
+package com.github.rwtnorton.wowironmangen
 
 import kotlin.random.Random
-import kotlin.math.*
 
 //
 // Randomly generate a World of Warcraft race/class/gender combo for the
@@ -13,48 +12,8 @@ import kotlin.math.*
 // No death knights.
 // warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
-
 fun main(args: Array<String>) {
-    println("hello")
-    val toon = Toon(
-        faction = Faction.Horde,
-        race = Race.Forsaken,
-        gender = Gender.Female,
-        wowClass = WowClass.Warlock
-    )
-    println(toon)
-    val toon2 = Toon(
-        faction = Faction.Alliance,
-        race = Race.Pandaren,
-        gender = Gender.Male,
-        wowClass = WowClass.Shaman
-    )
-    println(toon2)
-    val toon3 = Toon(
-        faction = Faction.Alliance,
-        race = Race.NightElf,
-        gender = Gender.Female,
-        wowClass = WowClass.Hunter
-    )
-    println(toon3)
-    println(Race.values().toList())
-    for (i in 1..5) {
-        println("${Race.random()} ${Faction.random()} ${Gender.random()}")
-    }
-    println("========================")
-    repeat(10) {
-        println(Toon.random())
-    }
-    println("=======================")
-    val p = Race.Pandaren
-    repeat(5) {
-        println(p.faction)
-    }
-    println("=======================")
-    repeat(5) {
-        println(Race.Pandaren.faction)
-    }
-
+    println(Toon.random())
 }
 
 val rand = Random(System.currentTimeMillis())
@@ -63,28 +22,65 @@ fun <T> List<T>.sample(): T =
     if (isEmpty())
         throw IllegalStateException("cannot sample empty collection")
     else
-        get((rand.nextInt() % size).absoluteValue)
+        get(Math.abs(rand.nextInt() % size))
 
-fun <T> Set<T>.sample(): T =
-    if (isEmpty())
-        throw IllegalStateException("cannot sample empty collection")
-    else
-        toList().sample()
+fun <T> Set<T>.sample(): T = toList().sample()
 
 fun classesForRace(race: Race): Set<WowClass> = when (race) {
-    Race.Human -> setOf(WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.NightElf -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Rogue, WowClass.Druid, WowClass.Monk, WowClass.Mage, WowClass.Priest)
-    Race.Dwarf -> setOf(WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Gnome -> setOf(WowClass.Warrior, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Draenei -> setOf(WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman, WowClass.Monk, WowClass.Mage, WowClass.Priest)
-    Race.Worgen -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Druid, WowClass.Rogue, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Pandaren -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Priest)
-    Race.Orc -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock)
-    Race.Troll -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Druid, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Forsaken -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Tauren -> setOf(WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman, WowClass.Druid, WowClass.Monk, WowClass.Priest)
-    Race.BloodElf -> setOf(WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
-    Race.Goblin -> setOf(WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue, WowClass.Mage, WowClass.Warlock, WowClass.Priest)
+    Race.Human -> setOf(
+        WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Rogue,
+        WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest
+    )
+    Race.NightElf -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Rogue, WowClass.Druid,
+        WowClass.Monk, WowClass.Mage, WowClass.Priest
+    )
+    Race.Dwarf -> setOf(
+        WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman,
+        WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock,
+        WowClass.Priest
+    )
+    Race.Gnome -> setOf(
+        WowClass.Warrior, WowClass.Rogue, WowClass.Monk, WowClass.Mage,
+        WowClass.Warlock, WowClass.Priest
+    )
+    Race.Draenei -> setOf(
+        WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman,
+        WowClass.Monk, WowClass.Mage, WowClass.Priest
+    )
+    Race.Worgen -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Druid, WowClass.Rogue,
+        WowClass.Mage, WowClass.Warlock, WowClass.Priest
+    )
+    Race.Pandaren -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue,
+        WowClass.Monk, WowClass.Mage, WowClass.Priest
+    )
+    Race.Orc -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue,
+        WowClass.Monk, WowClass.Mage, WowClass.Warlock
+    )
+    Race.Troll -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Druid,
+        WowClass.Rogue, WowClass.Monk, WowClass.Mage, WowClass.Warlock,
+        WowClass.Priest
+    )
+    Race.Forsaken -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Rogue, WowClass.Monk,
+        WowClass.Mage, WowClass.Warlock, WowClass.Priest
+    )
+    Race.Tauren -> setOf(
+        WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Shaman,
+        WowClass.Druid, WowClass.Monk, WowClass.Priest
+    )
+    Race.BloodElf -> setOf(
+        WowClass.Warrior, WowClass.Paladin, WowClass.Hunter, WowClass.Rogue,
+        WowClass.Monk, WowClass.Mage, WowClass.Warlock, WowClass.Priest
+    )
+    Race.Goblin -> setOf(
+        WowClass.Warrior, WowClass.Hunter, WowClass.Shaman, WowClass.Rogue,
+        WowClass.Mage, WowClass.Warlock, WowClass.Priest
+    )
 }
 
 enum class WowClass {
@@ -109,19 +105,9 @@ enum class WowClass {
 }
 
 enum class Race {
-    Human,
-    NightElf,
-    Dwarf,
-    Gnome,
-    Draenei,
-    Worgen,
+    Human, NightElf, Dwarf, Gnome, Draenei, Worgen,
     Pandaren,
-    Orc,
-    Troll,
-    Forsaken,
-    Tauren,
-    BloodElf,
-    Goblin;
+    Orc, Troll, Forsaken, Tauren, BloodElf, Goblin;
 
     val isMultiFaction: Boolean
         get() = this == Pandaren
