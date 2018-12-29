@@ -18,13 +18,13 @@ fun main(args: Array<String>) {
 
 val rand = Random(System.currentTimeMillis())
 
-fun <T> List<T>.sample(): T =
-    if (isEmpty())
-        throw IllegalStateException("cannot sample empty collection")
-    else
-        get(Math.abs(rand.nextInt() % size))
-
-fun <T> Set<T>.sample(): T = toList().sample()
+fun <T> Collection<T>.sample(): T =
+    toList().run {
+        if (isEmpty())
+            throw IllegalStateException("cannot sample empty collection")
+        else
+            get(Math.abs(rand.nextInt() % size))
+    }
 
 val camelCaseRegex = """([A-Z]?[a-z]+)""".toRegex()
 fun String.toSnakeCase() =
