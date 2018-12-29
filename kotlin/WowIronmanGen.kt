@@ -20,10 +20,8 @@ val rand = Random(System.currentTimeMillis())
 
 fun <T> Collection<T>.sample(): T =
     toList().run {
-        if (isEmpty())
-            throw IllegalStateException("cannot sample empty collection")
-        else
-            get(Math.abs(rand.nextInt() % size))
+        require(!isEmpty(), { "cannot sample empty collection" })
+        get(Math.abs(rand.nextInt() % size))
     }
 
 val camelCaseRegex = """([A-Z]?[a-z]+)""".toRegex()
