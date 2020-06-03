@@ -17,11 +17,11 @@ object Sampler {
 }
 
 trait SeqableEnum extends Enumeration {
-  def toSeq = values.toSeq
+  def toSeq: Seq[Value] = values.toSeq
 }
 
 trait SamplableEnum extends SeqableEnum {
-  def sample = Sampler.sample[Value](toSeq)
+  def sample: Value = Sampler.sample[Value](toSeq)
 }
 
 object Cls extends SamplableEnum {
@@ -66,7 +66,7 @@ object ClsMapper {
     blood_elf -> Set(warrior, paladin, hunter, rogue, monk, mage, warlock, priest),
     goblin    -> Set(warrior, hunter, shaman, rogue, mage, warlock, priest)
   )
-  def apply(r: Race) = classesForRace(r)
+  def apply(r: Race): Set[wow_ironman_gen.Cls.Value] = classesForRace(r)
 }
 
 case class Toon(
@@ -75,7 +75,7 @@ case class Toon(
   gender: Gender,
   faction: Faction) {
 
-  val shouldShowFaction = race == pandaren
+  val shouldShowFaction: Boolean = race == pandaren
 
   private[this] val attrs =
     if (shouldShowFaction)
@@ -85,7 +85,7 @@ case class Toon(
 
   val showableAttrs: Seq[String] = attrs map (_.toString())
 
-  override def toString(): String = showableAttrs mkString " "
+  override def toString: String = showableAttrs mkString " "
 }
 
 object Toon {
