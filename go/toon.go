@@ -12,7 +12,7 @@ type Toon struct {
 }
 
 func (t *Toon) ShouldDisplayFaction() bool {
-	return len(t.race.factions) > 1
+	return t.race.HasMultipleFactions()
 }
 
 func (t *Toon) String() string {

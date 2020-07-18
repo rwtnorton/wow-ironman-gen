@@ -14,6 +14,10 @@ func (r *Race) String() string {
 	return r.name
 }
 
+func (r *Race) HasMultipleFactions() bool {
+	return len(r.factions) > 1
+}
+
 var (
 	human = Race{
 		name:     "human",
