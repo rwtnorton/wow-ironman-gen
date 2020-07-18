@@ -1,5 +1,5 @@
 compile:
-	go build wow-ironman-gen.go
+	go build -o wow-ironman-gen ./...
 
 run: compile
 	./wow-ironman-gen
