@@ -125,13 +125,12 @@ static const char *factions[] = { "alliance", "horde" };
 static size_t factions_len = sizeof(factions) / sizeof(factions[0]);
 
 static void seed_srandom() {
-	FILE *f;
-	int buf;
-	f = fopen("/dev/random", "r");
+	FILE *f = fopen("/dev/random", "r");
 	if (!f) {
 		perror("Unable to open /dev/random");
 		exit(1);
 	}
+	int buf;
 	if (!fread(&buf, 4, 1, f)) {
 		perror("Unable to read /dev/random");
 		exit(1);
