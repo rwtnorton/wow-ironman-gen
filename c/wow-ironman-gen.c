@@ -154,13 +154,10 @@ static const struct RaceClass race_class_sample(const struct RaceClass choices[]
 }
 
 int main(void) {
-	struct RaceClass combo;
-	const char *race, *cls, *gender;
-
 	seed_srandom();
 
-	combo = race_class_sample(combos, combos_len);
-	gender = sample(genders, genders_len);
+	struct RaceClass combo = race_class_sample(combos, combos_len);
+	const char *gender = sample(genders, genders_len);
 
 	if (strcmp(combo.race, "pandaren") == 0) {
 		const char *faction = sample(factions, factions_len);
