@@ -6,3 +6,6 @@ run: compile
 
 clean:
 	$(RM) bin/wow-ironman-gen
+
+etags:
+	etags -o TAGS src/*.[ch]
