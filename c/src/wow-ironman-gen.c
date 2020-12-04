@@ -8,17 +8,17 @@
  */
 
 /*
-human, night_elf, dwarf, gnome, draenei, worgen, pandaren,
-orc, troll, forsaken, tauren, blood_elf, goblin
-No death knights.
-warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
+  human, night_elf, dwarf, gnome, draenei, worgen, pandaren,
+  orc, troll, forsaken, tauren, blood_elf, goblin
+  No death knights.
+  warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 */
 
 struct RaceClass {
 	const char *race;
 	const char *cls;
 };
-const struct RaceClass combos[] = {
+static const struct RaceClass combos[] = {
 	{ "human", "warrior" },
 	{ "human", "paladin" },
 	{ "human", "hunter" },
@@ -116,16 +116,15 @@ const struct RaceClass combos[] = {
 	{ "goblin", "warlock" },
 	{ "goblin", "priest" },
 };
-const size_t combos_len = sizeof(combos) / sizeof(combos[0]);
+static const size_t combos_len = sizeof(combos) / sizeof(combos[0]);
 
-const char *genders[] = { "male", "female" };
-size_t genders_len = sizeof(genders) / sizeof(genders[0]);
+static const char *genders[] = { "male", "female" };
+static size_t genders_len = sizeof(genders) / sizeof(genders[0]);
 
-const char *factions[] = { "alliance", "horde" };
-size_t factions_len = sizeof(factions) / sizeof(factions[0]);
+static const char *factions[] = { "alliance", "horde" };
+static size_t factions_len = sizeof(factions) / sizeof(factions[0]);
 
-void seed_srandom()
-{
+static void seed_srandom() {
 	FILE *f;
 	int buf;
 	f = fopen("/dev/random", "r");
@@ -144,20 +143,18 @@ void seed_srandom()
 	}
 }
 
-const char *sample(const char *choices[], size_t len)
-{
-	int which = random() % len;
-	return choices[which];
-}
-const struct RaceClass race_class_sample(const struct RaceClass choices[],
-					size_t len)
-{
+static const char *sample(const char *choices[], size_t len) {
 	int which = random() % len;
 	return choices[which];
 }
 
-int main(void)
-{
+static const struct RaceClass race_class_sample(const struct RaceClass choices[],
+                                                size_t len) {
+	int which = random() % len;
+	return choices[which];
+}
+
+int main(void) {
 	struct RaceClass combo;
 	const char *race, *cls, *gender;
 
@@ -169,7 +166,7 @@ int main(void)
 	if (strcmp(combo.race, "pandaren") == 0) {
 		const char *faction = sample(factions, factions_len);
 		printf("%s %s %s %s\n",
-			gender, faction, combo.race, combo.cls);
+                       gender, faction, combo.race, combo.cls);
 	} else {
 		printf("%s %s %s\n", gender, combo.race, combo.cls);
 	}
