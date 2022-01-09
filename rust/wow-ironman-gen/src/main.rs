@@ -32,6 +32,10 @@ fn main() {
     println!("{:?}", random_genders);
     let random_factions : Vec<Faction> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_factions);
+    let random_races : Vec<Race> = Standard.sample_iter(&mut rng).take(10).collect();
+    println!("{:?}", random_races);
+    let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
+    println!("{:?}", random_classes);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -89,6 +93,31 @@ enum Race {
     Orc, Troll, Forsaken, Tauren, BloodElf, Goblin,
 }
 
+impl Race {
+    const ALL : &'static [Race] = &[
+        Race::BloodElf,
+        Race::Draenei,
+        Race::Dwarf,
+        Race::Forsaken,
+        Race::Gnome,
+        Race::Goblin,
+        Race::Human,
+        Race::NightElf,
+        Race::Orc,
+        Race::Pandaren,
+        Race::Tauren,
+        Race::Troll,
+        Race::Worgen,
+    ];
+}
+
+impl Distribution<Race> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Race {
+        let i = rng.gen_range(0..Race::ALL.len());
+        Race::ALL[i]
+    }
+}
+
 impl fmt::Display for Race {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
@@ -114,6 +143,28 @@ impl fmt::Display for Race {
 enum Class {
     Warrior, Paladin, Hunter, Shaman, Druid,
     Rogue, Monk, Mage, Warlock, Priest,
+}
+
+impl Class {
+    const ALL : &'static [Class] = &[
+        Class::Druid,
+        Class::Hunter,
+        Class::Mage,
+        Class::Monk,
+        Class::Paladin,
+        Class::Priest,
+        Class::Rogue,
+        Class::Shaman,
+        Class::Warlock,
+        Class::Warrior,
+    ];
+}
+
+impl Distribution<Class> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Class {
+        let i = rng.gen_range(0..Class::ALL.len());
+        Class::ALL[i]
+    }
 }
 
 impl fmt::Display for Class {
