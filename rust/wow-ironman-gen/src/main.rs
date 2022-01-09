@@ -20,6 +20,7 @@ fn main() {
     println!("gender = {}", toon.gender);
     println!("faction = {}", toon.faction);
     println!("race = {}", toon.race);
+    println!("class = {}", toon.class);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -80,6 +81,24 @@ impl fmt::Display for Race {
 enum Class {
     Warrior, Paladin, Hunter, Shaman, Druid,
     Rogue, Monk, Mage, Warlock, Priest,
+}
+
+impl fmt::Display for Class {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Class::Druid => "druid",
+            Class::Hunter => "hunter",
+            Class::Mage => "mage",
+            Class::Monk => "monk",
+            Class::Paladin => "paladin",
+            Class::Priest => "priest",
+            Class::Rogue => "rogue",
+            Class::Shaman => "shaman",
+            Class::Warlock => "warlock",
+            Class::Warrior => "warrior",
+        };
+        write!(f, "{}", s)
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
