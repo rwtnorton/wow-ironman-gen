@@ -25,6 +25,8 @@ fn main() {
     println!("toon = {}", toon);
     println!("toon = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
     println!("{:?}", Race::Dwarf.allowed_classes());
+    println!("{:?}", Race::Dwarf.allowed_faction());
+    println!("{:?}", Race::Pandaren.allowed_faction());
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -140,5 +142,23 @@ impl Race {
             Race::Troll => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Druid, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
             Race::Worgen => vec![Class::Warrior, Class::Hunter, Class::Druid, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest],
         }.into_iter().collect()
+    }
+
+    fn allowed_faction(&self) -> Option<Faction> {
+        match self {
+            Race::BloodElf => Some(Faction::Horde),
+            Race::Draenei => Some(Faction::Alliance),
+            Race::Dwarf => Some(Faction::Alliance),
+            Race::Forsaken => Some(Faction::Horde),
+            Race::Gnome => Some(Faction::Alliance),
+            Race::Goblin => Some(Faction::Horde),
+            Race::Human => Some(Faction::Alliance),
+            Race::NightElf => Some(Faction::Alliance),
+            Race::Orc => Some(Faction::Horde),
+            Race::Pandaren => None,
+            Race::Tauren => Some(Faction::Horde),
+            Race::Troll => Some(Faction::Horde),
+            Race::Worgen => Some(Faction::Alliance),
+        }
     }
 }
