@@ -21,6 +21,8 @@ fn main() {
     println!("faction = {}", toon.faction);
     println!("race = {}", toon.race);
     println!("class = {}", toon.class);
+    println!("toon = {}", toon);
+    println!("toon = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -109,6 +111,12 @@ struct Toon {
     faction: Faction,
 }
 
-// impl fmt::Show for Toon {
-    
-// }
+impl fmt::Display for Toon {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self.race {
+            Race::Pandaren => format!("{} {} {} {}", self.gender, self.faction, self.race, self.class),
+            _ => format!("{} {} {}", self.gender, self.race, self.class),
+        };
+        write!(f, "{}", s)
+    }
+}
