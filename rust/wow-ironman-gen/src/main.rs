@@ -37,7 +37,13 @@ fn main() {
     let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_classes);
     for _i in 0..10 {
-        println!("{}", Race::Troll.random_class(&mut rng));
+        println!("troll class: {}", Race::Troll.random_class(&mut rng));
+    }
+    for _i in 0..3 {
+        println!("troll faction: {}", Race::Troll.random_faction(&mut rng));
+    }
+    for _i in 0..3 {
+        println!("pandaren faction: {}", Race::Pandaren.random_faction(&mut rng));
     }
 }
 
@@ -262,6 +268,18 @@ impl Race {
         match classes.choose(rng) {
             Some(class) => class,
             None => panic!("{} seems to have no allowed classes???", self)
+        }
+    }
+
+    fn random_faction<R: Rng + ?Sized>(&self, rng: &mut R) -> Faction {
+        match self.allowed_faction() {
+            Some(faction) => faction,
+            None => {
+                match Faction::ALL.choose(rng) {
+                    Some(faction) => *faction,
+                    None => panic!("{} seems to have no allowed factions???", self)
+                }
+            }
         }
     }
 }
