@@ -11,6 +11,7 @@
 use std::fmt;
 use std::collections::HashSet;
 use rand::{thread_rng, Rng};
+use rand::distributions::{Distribution, Standard};
 
 fn main() {
     let mut rng = thread_rng();
@@ -27,10 +28,20 @@ fn main() {
     println!("dwarf classes: {:?}", Race::Dwarf.allowed_classes());
     println!("dwarf faction: {:?}", Race::Dwarf.allowed_faction());
     println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
+    let random_genders : Vec<Gender> = Standard.sample_iter(&mut rng).take(10).collect();
+    println!("{:?}", random_genders);
+    println!("{:?}", Gender::all_variants());
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Gender { Female, Male }
+
+impl Gender {
+    const ALL : &'static [Gender] = &[Gender::Female, Gender::Male];
+    fn all_variants<'a>() -> &'a [Gender] {
+        Gender::ALL
+    }
+}
 
 impl fmt::Display for Gender {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -39,6 +50,13 @@ impl fmt::Display for Gender {
             Gender::Male => "male",
         };
         write!(f, "{}", s)
+    }
+}
+
+impl Distribution<Gender> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Gender {
+        let i = rng.gen_range(0..Gender::ALL.len());
+        Gender::ALL[i]
     }
 }
 
