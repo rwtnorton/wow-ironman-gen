@@ -12,6 +12,7 @@ use std::fmt;
 use std::collections::HashSet;
 use rand::{thread_rng, Rng};
 use rand::distributions::{Distribution, Standard};
+use rand::seq::SliceRandom;
 
 fn main() {
     let mut rng = thread_rng();
@@ -36,6 +37,9 @@ fn main() {
     println!("{:?}", random_races);
     let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_classes);
+    for i in 0..10 {
+        println!("{}", Race::Troll.random_class(&mut rng));
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -158,6 +162,20 @@ impl Class {
         Class::Warlock,
         Class::Warrior,
     ];
+
+    const BLOOD_ELF_CLASSES: &'static [Class] = &[Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const DRAENEI_CLASSES: &'static [Class] = &[Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Monk, Class::Mage, Class::Priest];
+    const DWARF_CLASSES: &'static [Class] = &[Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const FORSAKEN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const GNOME_CLASSES: &'static [Class] = &[Class::Warrior, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const GOBLIN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest];
+    const HUMAN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const NIGHT_ELF_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Rogue, Class::Druid, Class::Monk, Class::Mage, Class::Priest];
+    const ORC_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock];
+    const PANDAREN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Priest];
+    const TAUREN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Druid, Class::Monk, Class::Priest];
+    const TROLL_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Shaman, Class::Druid, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest];
+    const WORGEN_CLASSES: &'static [Class] = &[Class::Warrior, Class::Hunter, Class::Druid, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest];
 }
 
 impl Distribution<Class> for Standard {
@@ -204,22 +222,22 @@ impl fmt::Display for Toon {
 }
 
 impl Race {
-    fn allowed_classes(&self) -> HashSet<Class> {
+    fn allowed_classes(&self) -> &[Class] {
         match self {
-            Race::BloodElf => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Draenei => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Monk, Class::Mage, Class::Priest],
-            Race::Dwarf => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Forsaken => vec![Class::Warrior, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Gnome => vec![Class::Warrior, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Goblin => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Human => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::NightElf => vec![Class::Warrior, Class::Hunter, Class::Rogue, Class::Druid, Class::Monk, Class::Mage, Class::Priest],
-            Race::Orc => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock],
-            Race::Pandaren => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Priest],
-            Race::Tauren => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Druid, Class::Monk, Class::Priest],
-            Race::Troll => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Druid, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
-            Race::Worgen => vec![Class::Warrior, Class::Hunter, Class::Druid, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest],
-        }.into_iter().collect()
+            Race::BloodElf => Class::BLOOD_ELF_CLASSES,
+            Race::Draenei => Class::DRAENEI_CLASSES,
+            Race::Dwarf => Class::DWARF_CLASSES,
+            Race::Forsaken => Class::FORSAKEN_CLASSES,
+            Race::Gnome => Class::GNOME_CLASSES,
+            Race::Goblin => Class::GOBLIN_CLASSES,
+            Race::Human => Class::HUMAN_CLASSES,
+            Race::NightElf => Class::NIGHT_ELF_CLASSES,
+            Race::Orc => Class::ORC_CLASSES,
+            Race::Pandaren => Class::PANDAREN_CLASSES,
+            Race::Tauren => Class::TAUREN_CLASSES,
+            Race::Troll => Class::TROLL_CLASSES,
+            Race::Worgen => Class::WORGEN_CLASSES,
+        }
     }
 
     fn allowed_faction(&self) -> Option<Faction> {
@@ -237,6 +255,14 @@ impl Race {
             Race::Tauren => Some(Faction::Horde),
             Race::Troll => Some(Faction::Horde),
             Race::Worgen => Some(Faction::Alliance),
+        }
+    }
+
+    fn random_class<R: Rng + ?Sized>(&self, rng: &mut R) -> &Class {
+        let classes = self.allowed_classes();
+        match classes.choose(rng) {
+            Some(class) => class,
+            None => panic!("{} seems to have no allowed classes???", self)
         }
     }
 }
