@@ -30,6 +30,8 @@ fn main() {
     println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
     let random_genders : Vec<Gender> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_genders);
+    let random_factions : Vec<Faction> = Standard.sample_iter(&mut rng).take(10).collect();
+    println!("{:?}", random_factions);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -37,6 +39,13 @@ enum Gender { Female, Male }
 
 impl Gender {
     const ALL : &'static [Gender] = &[Gender::Female, Gender::Male];
+}
+
+impl Distribution<Gender> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Gender {
+        let i = rng.gen_range(0..Gender::ALL.len());
+        Gender::ALL[i]
+    }
 }
 
 impl fmt::Display for Gender {
@@ -49,15 +58,19 @@ impl fmt::Display for Gender {
     }
 }
 
-impl Distribution<Gender> for Standard {
-    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Gender {
-        let i = rng.gen_range(0..Gender::ALL.len());
-        Gender::ALL[i]
-    }
-}
-
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Faction { Horde, Alliance }
+
+impl Faction {
+    const ALL : &'static [Faction] = &[Faction::Alliance, Faction::Horde];
+}
+
+impl Distribution<Faction> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Faction {
+        let i = rng.gen_range(0..Faction::ALL.len());
+        Faction::ALL[i]
+    }
+}
 
 impl fmt::Display for Faction {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
