@@ -30,7 +30,6 @@ fn main() {
     println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
     let random_genders : Vec<Gender> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_genders);
-    println!("{:?}", Gender::all_variants());
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -38,9 +37,6 @@ enum Gender { Female, Male }
 
 impl Gender {
     const ALL : &'static [Gender] = &[Gender::Female, Gender::Male];
-    fn all_variants<'a>() -> &'a [Gender] {
-        Gender::ALL
-    }
 }
 
 impl fmt::Display for Gender {
