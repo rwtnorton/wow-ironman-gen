@@ -18,6 +18,7 @@ fn main() {
     let toon = Toon { gender: Gender::Male, faction: Faction::Horde, race: Race::Orc, class: Class::Rogue };
     println!("toon = {:?}", toon);
     println!("gender = {}", toon.gender);
+    println!("faction = {}", toon.faction);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -35,6 +36,16 @@ impl fmt::Display for Gender {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Faction { Horde, Alliance }
+
+impl fmt::Display for Faction {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Faction::Alliance => "alliance",
+            Faction::Horde => "horde",
+        };
+        write!(f, "{}", s)
+    }
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Race {
