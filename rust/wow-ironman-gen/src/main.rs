@@ -9,7 +9,6 @@
 // warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
 use std::fmt;
-use std::collections::HashSet;
 use rand::{thread_rng, Rng};
 use rand::distributions::{Distribution, Standard};
 use rand::seq::SliceRandom;
@@ -37,7 +36,7 @@ fn main() {
     println!("{:?}", random_races);
     let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
     println!("{:?}", random_classes);
-    for i in 0..10 {
+    for _i in 0..10 {
         println!("{}", Race::Troll.random_class(&mut rng));
     }
 }
