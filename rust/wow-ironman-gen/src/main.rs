@@ -8,6 +8,7 @@
 // No death knights.
 // warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
+use std::fmt;
 use rand::{thread_rng, Rng};
 
 fn main() {
@@ -16,10 +17,21 @@ fn main() {
     println!("{}", x);
     let toon = Toon { gender: Gender::Male, faction: Faction::Horde, race: Race::Orc, class: Class::Rogue };
     println!("toon = {:?}", toon);
+    println!("gender = {}", toon.gender);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Gender { Female, Male }
+
+impl fmt::Display for Gender {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Gender::Female => "female",
+            Gender::Male => "male",
+        };
+        write!(f, "{}", s)
+    }
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Faction { Horde, Alliance }
