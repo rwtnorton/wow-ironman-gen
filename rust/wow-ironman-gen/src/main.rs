@@ -9,6 +9,7 @@
 // warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest
 
 use std::fmt;
+use std::collections::HashSet;
 use rand::{thread_rng, Rng};
 
 fn main() {
@@ -23,6 +24,7 @@ fn main() {
     println!("class = {}", toon.class);
     println!("toon = {}", toon);
     println!("toon = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
+    println!("{:?}", Race::Dwarf.allowed_classes());
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -118,5 +120,25 @@ impl fmt::Display for Toon {
             _ => format!("{} {} {}", self.gender, self.race, self.class),
         };
         write!(f, "{}", s)
+    }
+}
+
+impl Race {
+    fn allowed_classes(&self) -> HashSet<Class> {
+        match self {
+            Race::BloodElf => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Draenei => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Monk, Class::Mage, Class::Priest],
+            Race::Dwarf => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Forsaken => vec![Class::Warrior, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Gnome => vec![Class::Warrior, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Goblin => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Human => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::NightElf => vec![Class::Warrior, Class::Hunter, Class::Rogue, Class::Druid, Class::Monk, Class::Mage, Class::Priest],
+            Race::Orc => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock],
+            Race::Pandaren => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Rogue, Class::Monk, Class::Mage, Class::Priest],
+            Race::Tauren => vec![Class::Warrior, Class::Paladin, Class::Hunter, Class::Shaman, Class::Druid, Class::Monk, Class::Priest],
+            Race::Troll => vec![Class::Warrior, Class::Hunter, Class::Shaman, Class::Druid, Class::Rogue, Class::Monk, Class::Mage, Class::Warlock, Class::Priest],
+            Race::Worgen => vec![Class::Warrior, Class::Hunter, Class::Druid, Class::Rogue, Class::Mage, Class::Warlock, Class::Priest],
+        }.into_iter().collect()
     }
 }
