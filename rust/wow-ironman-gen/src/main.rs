@@ -23,10 +23,10 @@ fn main() {
     println!("race = {}", toon.race);
     println!("class = {}", toon.class);
     println!("toon = {}", toon);
-    println!("toon = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
-    println!("{:?}", Race::Dwarf.allowed_classes());
-    println!("{:?}", Race::Dwarf.allowed_faction());
-    println!("{:?}", Race::Pandaren.allowed_faction());
+    println!("pandaren = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
+    println!("dwarf classes: {:?}", Race::Dwarf.allowed_classes());
+    println!("dwarf faction: {:?}", Race::Dwarf.allowed_faction());
+    println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
