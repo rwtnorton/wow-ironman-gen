@@ -19,6 +19,7 @@ fn main() {
     println!("toon = {:?}", toon);
     println!("gender = {}", toon.gender);
     println!("faction = {}", toon.faction);
+    println!("race = {}", toon.race);
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -52,6 +53,27 @@ enum Race {
     Human, NightElf, Dwarf, Gnome, Draenei, Worgen,
     Pandaren,
     Orc, Troll, Forsaken, Tauren, BloodElf, Goblin,
+}
+
+impl fmt::Display for Race {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            Race::BloodElf => "blood_elf",
+            Race::Draenei => "draenei",
+            Race::Dwarf => "dwarf",
+            Race::Forsaken => "forsaken",
+            Race::Gnome => "gnome",
+            Race::Goblin => "goblin",
+            Race::Human => "human",
+            Race::NightElf => "night_elf",
+            Race::Orc => "orc",
+            Race::Pandaren => "pandaren",
+            Race::Tauren => "tauren",
+            Race::Troll => "troll",
+            Race::Worgen => "worgen",
+        };
+        write!(f, "{}", s)
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
