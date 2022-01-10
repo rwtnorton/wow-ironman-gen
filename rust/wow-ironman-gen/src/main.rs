@@ -15,39 +15,39 @@ use rand::seq::SliceRandom;
 
 fn main() {
     let mut rng = thread_rng();
-    let x: u32 = rng.gen();
-    println!("{}", x);
-    let toon = Toon { gender: Gender::Male, faction: Faction::Horde, race: Race::Orc, class: Class::Rogue };
-    println!("toon = {:?}", toon);
-    println!("gender = {}", toon.gender);
-    println!("faction = {}", toon.faction);
-    println!("race = {}", toon.race);
-    println!("class = {}", toon.class);
-    println!("toon = {}", toon);
-    println!("pandaren = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
-    println!("dwarf classes: {:?}", Race::Dwarf.allowed_classes());
-    println!("dwarf faction: {:?}", Race::Dwarf.allowed_faction());
-    println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
-    let random_genders : Vec<Gender> = Standard.sample_iter(&mut rng).take(10).collect();
-    println!("{:?}", random_genders);
-    let random_factions : Vec<Faction> = Standard.sample_iter(&mut rng).take(10).collect();
-    println!("{:?}", random_factions);
-    let random_races : Vec<Race> = Standard.sample_iter(&mut rng).take(10).collect();
-    println!("{:?}", random_races);
-    let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
-    println!("{:?}", random_classes);
-    for _i in 0..10 {
-        println!("troll class: {}", Race::Troll.random_class(&mut rng));
-    }
-    for _i in 0..3 {
-        println!("troll faction: {}", Race::Troll.random_faction(&mut rng));
-    }
-    for _i in 0..3 {
-        println!("pandaren faction: {}", Race::Pandaren.random_faction(&mut rng));
-    }
-    for _i in 0..5 {
-        println!("{}", Toon::random_toon(&mut rng));
-    }
+
+    // let x: u32 = rng.gen();
+    // println!("{}", x);
+    // let toon = Toon { gender: Gender::Male, faction: Faction::Horde, race: Race::Orc, class: Class::Rogue };
+    // println!("toon = {:?}", toon);
+    // println!("gender = {}", toon.gender);
+    // println!("faction = {}", toon.faction);
+    // println!("race = {}", toon.race);
+    // println!("class = {}", toon.class);
+    // println!("toon = {}", toon);
+    // println!("pandaren = {}", Toon { gender: Gender::Female, faction: Faction::Alliance, race: Race::Pandaren, class: Class::Monk });
+    // println!("dwarf classes: {:?}", Race::Dwarf.allowed_classes());
+    // println!("dwarf faction: {:?}", Race::Dwarf.allowed_faction());
+    // println!("pandaren faction: {:?}", Race::Pandaren.allowed_faction());
+    // let random_genders : Vec<Gender> = Standard.sample_iter(&mut rng).take(10).collect();
+    // println!("{:?}", random_genders);
+    // let random_factions : Vec<Faction> = Standard.sample_iter(&mut rng).take(10).collect();
+    // println!("{:?}", random_factions);
+    // let random_races : Vec<Race> = Standard.sample_iter(&mut rng).take(10).collect();
+    // println!("{:?}", random_races);
+    // let random_classes : Vec<Class> = Standard.sample_iter(&mut rng).take(10).collect();
+    // println!("{:?}", random_classes);
+    // for _i in 0..10 {
+    //     println!("troll class: {}", Race::Troll.random_class(&mut rng));
+    // }
+    // for _i in 0..3 {
+    //     println!("troll faction: {}", Race::Troll.random_faction(&mut rng));
+    // }
+    // for _i in 0..3 {
+    //     println!("pandaren faction: {}", Race::Pandaren.random_faction(&mut rng));
+    // }
+
+    println!("{}", Toon::random_toon(&mut rng));
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
