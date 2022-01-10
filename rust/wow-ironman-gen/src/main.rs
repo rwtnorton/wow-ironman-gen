@@ -45,6 +45,9 @@ fn main() {
     for _i in 0..3 {
         println!("pandaren faction: {}", Race::Pandaren.random_faction(&mut rng));
     }
+    for _i in 0..5 {
+        println!("{}", Toon::random_toon(&mut rng));
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -280,6 +283,21 @@ impl Race {
                     None => panic!("{} seems to have no allowed factions???", self)
                 }
             }
+        }
+    }
+}
+
+impl Toon {
+    fn random_toon<R: Rng + ?Sized>(rng: &mut R) -> Toon {
+        let gender: Gender = rng.gen();
+        let race: Race = rng.gen();
+        let class = race.random_class(rng);
+        let faction = race.random_faction(rng);
+        Toon {
+            gender: gender,
+            race: race,
+            class: *class,
+            faction: faction,
         }
     }
 }
