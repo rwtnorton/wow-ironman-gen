@@ -74,6 +74,12 @@ impl fmt::Display for Gender {
     }
 }
 
+#[test]
+fn test_gender_display() {
+    assert_eq!(Gender::Female.to_string(), "female");
+    assert_eq!(Gender::Male.to_string(), "male");
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 enum Faction { Horde, Alliance }
 
@@ -96,6 +102,12 @@ impl fmt::Display for Faction {
         };
         write!(f, "{}", s)
     }
+}
+
+#[test]
+fn test_faction_display() {
+    assert_eq!(Faction::Alliance.to_string(), "alliance");
+    assert_eq!(Faction::Horde.to_string(), "horde");
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -149,6 +161,13 @@ impl fmt::Display for Race {
         };
         write!(f, "{}", s)
     }
+}
+
+#[test]
+fn test_race_display() {
+    assert_eq!(Race::BloodElf.to_string(), "blood_elf");
+    assert_eq!(Race::Pandaren.to_string(), "pandaren");
+    assert_eq!(Race::NightElf.to_string(), "night_elf");
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -300,4 +319,26 @@ impl Toon {
             faction: faction,
         }
     }
+}
+
+#[test]
+fn test_toon_display() {
+    assert_eq!(Toon {
+        gender: Gender::Female,
+        faction: Faction::Alliance,
+        race: Race::Gnome,
+        class: Class::Warrior,
+    }.to_string(), "female gnome warrior");
+    assert_eq!(Toon {
+        gender: Gender::Female,
+        faction: Faction::Alliance,
+        race: Race::Pandaren,
+        class: Class::Rogue,
+    }.to_string(), "female alliance pandaren rogue");
+    assert_eq!(Toon {
+        gender: Gender::Male,
+        faction: Faction::Horde,
+        race: Race::Pandaren,
+        class: Class::Monk,
+    }.to_string(), "male horde pandaren monk");
 }
