@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -eu
+
+cd "$(dirname $0)/wow_ironman_gen"
+
+exec ./main_cli.py --json_file=wow_ironman_gen/data/classic.json "$@"

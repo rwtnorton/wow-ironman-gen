@@ -1,0 +1,6 @@
+.idea/
+.coverage
+.pytest_cache/
+build/
+wow_ironman_gen.egg-info/
+.venv/

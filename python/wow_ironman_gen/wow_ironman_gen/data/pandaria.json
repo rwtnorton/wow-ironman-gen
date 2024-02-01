@@ -1,0 +1,67 @@
+{
+    "human": {
+      "classes": ["warrior", "paladin", "hunter", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "night_elf":  {
+      "classes": ["warrior", "hunter", "rogue", "druid", "monk", "mage", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "dwarf":  {
+      "classes": ["warrior", "paladin", "hunter", "shaman", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "gnome":  {
+      "classes": ["warrior", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "draenei":  {
+      "classes": ["warrior", "paladin", "hunter", "shaman", "monk", "mage", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "worgen":  {
+      "classes": ["warrior", "hunter", "druid", "rogue", "mage", "warlock", "priest"],
+      "factions": ["alliance"],
+      "genders": ["female", "male"]
+    },
+    "pandaren":  {
+      "classes": ["warrior", "hunter", "shaman", "rogue", "monk", "mage", "priest"],
+      "factions": ["alliance", "horde"],
+      "genders": ["female", "male"]
+    },
+    "orc":  {
+      "classes": ["warrior", "hunter", "shaman", "rogue", "monk", "mage", "warlock"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    },
+    "troll":  {
+      "classes": ["warrior", "hunter", "shaman", "druid", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    },
+    "forsaken":  {
+      "classes": ["warrior", "hunter", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    },
+    "tauren":  {
+      "classes": ["warrior", "paladin", "hunter", "shaman", "druid", "monk", "priest"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    },
+    "blood_elf":  {
+      "classes": ["warrior", "paladin", "hunter", "rogue", "monk", "mage", "warlock", "priest"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    },
+    "goblin":  {
+      "classes": ["warrior", "hunter", "shaman", "rogue", "mage", "warlock", "priest"],
+      "factions": ["horde"],
+      "genders": ["female", "male"]
+    }
+}
