@@ -4,4 +4,4 @@ set -eu
 
 cd "$(dirname $0)"
 
-exec pytest -v wow_ironman_gen/tests/
+exec pytest -v --cov=wow_ironman_gen wow_ironman_gen/tests/
