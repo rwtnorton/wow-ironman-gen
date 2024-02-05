@@ -5,4 +5,4 @@ set -eu
 cd "$(dirname $0)"
 
 # Installed via: pip install pip-tools
-exec pip-compile
+exec pip-compile --generate-hashes
