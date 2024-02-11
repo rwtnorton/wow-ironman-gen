@@ -34,6 +34,8 @@ female horde orc shaman
 
 ```
 $ ./run_tests
+### or with tox
+$ ./run_tests_with_tox
 ```
 
 ## Linting
@@ -41,4 +43,9 @@ $ ./run_tests
 Uses `flake8`.
 ```
 $ ./lint
+```
+
+Run `mypy`.
+```
+$ ./run_mypy
 ```
