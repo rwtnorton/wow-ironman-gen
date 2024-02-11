@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Any
 import random
 
 
@@ -11,7 +11,7 @@ class Races:
 
     races: set[str]
 
-    def __init__(self, data: dict):
+    def __init__(self, data: dict[str, Any]):
         self.races = set(data.keys())
 
     def random_race(self) -> Optional[str]:

@@ -1,6 +1,7 @@
 import json
 from dataclasses import dataclass
 import os.path
+from typing import Optional
 
 DEFAULT_PATH = os.path.join(
     os.path.dirname(__file__), "data", "pandaria.json")
@@ -12,8 +13,8 @@ class Loader:
     Loads data dict from given JSON file.
     """
 
-    path: str = None
-    data: dict = None
+    path: Optional[str] = None
+    data: Optional[dict] = None
 
     def __init__(self, path=DEFAULT_PATH):
         self.path = path

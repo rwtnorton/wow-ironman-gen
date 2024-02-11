@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import random
-from typing import Optional
+from typing import Optional, Any
 
 
 @dataclass
@@ -9,9 +9,9 @@ class Classes:
     Class for extracting valid classes from data dict by race.
     """
 
-    classes_by_race: dict
+    classes_by_race: dict[str, set[str]]
 
-    def __init__(self, data: dict):
+    def __init__(self, data: dict[str, Any]):
         self.classes_by_race = {}
         for race, attributes in data.items():
             classes = attributes['classes']

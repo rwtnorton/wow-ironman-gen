@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -eu
+
+cd "$(dirname $0)"
+
+exec mypy wow_ironman_gen main_cli.py

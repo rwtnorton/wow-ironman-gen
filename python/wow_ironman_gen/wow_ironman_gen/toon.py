@@ -3,6 +3,7 @@ from wow_ironman_gen.races import Races
 from wow_ironman_gen.classes import Classes
 from wow_ironman_gen.factions import Factions
 from wow_ironman_gen.genders import Genders
+from typing import Any
 
 
 @dataclass
@@ -17,7 +18,7 @@ class Toon:
     gender: str
 
     @classmethod
-    def random_toon(cls, data: dict):
+    def random_toon(cls, data: dict[str, Any]):
         """
         Generates a random Toon, from the given data.
         :param data: dictionary with race keys and
