@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Any
+from typing import Optional, Any, Mapping
 import random
 
 
@@ -9,9 +9,9 @@ class Genders:
     Class to extract valid genders from data dict by race.
     """
 
-    genders_for_race: dict[str, set[str]]
+    genders_for_race: Mapping[str, set[str]]
 
-    def __init__(self, data: dict[str, Any]):
+    def __init__(self, data: Mapping[str, Any]):
         self.genders_for_race = {}
         for race, attributes in data.items():
             self.genders_for_race[race] = set(attributes['genders'])

@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass
 import os.path
-from typing import Optional
+from typing import Optional, Mapping
 
 DEFAULT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'pandaria.json')
 
@@ -13,7 +13,7 @@ class Loader:
     """
 
     path: Optional[str] = None
-    data: Optional[dict] = None
+    data: Optional[Mapping] = None
 
     def __init__(self, path=DEFAULT_PATH):
         self.path = path
