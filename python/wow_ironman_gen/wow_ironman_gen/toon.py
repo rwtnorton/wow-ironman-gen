@@ -27,21 +27,17 @@ class Toon:
         """
         r = Races(data).random_race()
         if r is None:
-            raise ValueError(f"invalid races: data={data}")
+            raise ValueError(f'invalid races: data={data}')
         c = Classes(data).random_class(r)
         if c is None:
-            raise ValueError(f"invalid class: race={r}, data={data}")
+            raise ValueError(f'invalid class: race={r}, data={data}')
         f = Factions(data).random_faction(r)
         if f is None:
-            raise ValueError(f"invalid faction: race={r}, data={data}")
+            raise ValueError(f'invalid faction: race={r}, data={data}')
         g = Genders(data).random_gender(r)
         if g is None:
-            raise ValueError(f"invalid gender: race={r}, data={data}")
+            raise ValueError(f'invalid gender: race={r}, data={data}')
         return Toon(race=r, wow_class=c, faction=f, gender=g)
 
     def __str__(self) -> str:
-        return ' '.join([
-            self.gender,
-            self.faction,
-            self.race,
-            self.wow_class])
+        return ' '.join([self.gender, self.faction, self.race, self.wow_class])

@@ -3,8 +3,7 @@ from dataclasses import dataclass
 import os.path
 from typing import Optional
 
-DEFAULT_PATH = os.path.join(
-    os.path.dirname(__file__), "data", "pandaria.json")
+DEFAULT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'pandaria.json')
 
 
 @dataclass
@@ -19,7 +18,7 @@ class Loader:
     def __init__(self, path=DEFAULT_PATH):
         self.path = path
         self.data = {}
-        with open(path, "r") as fp:
+        with open(path, 'r') as fp:
             raw_data = json.load(fp)
         for race, attributes in raw_data.items():
             for key, value in attributes.items():

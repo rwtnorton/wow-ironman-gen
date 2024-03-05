@@ -11,7 +11,8 @@ dependencies = [
     "flake8",
     "pytest-cov",
     "tox",
-    "mypy"
+    "mypy",
+    "blue"
 ]
 authors = [{name = "Richard W. Norton", email = "rwtnorton@gmail.com"}]
 license = {text = "MIT License"}
