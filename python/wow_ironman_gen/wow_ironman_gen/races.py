@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Any, Mapping, Sequence
+from typing import Optional, Mapping, Sequence
 import random
 
 

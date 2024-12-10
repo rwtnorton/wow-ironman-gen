@@ -8,7 +8,7 @@ version = "1.1.0"
 requires-python = ">= 3.8"
 dependencies = [
     "pytest",
-    "flake8",
+    "flake8>=7.0.0",
     "pytest-cov",
     "tox",
     "mypy",
