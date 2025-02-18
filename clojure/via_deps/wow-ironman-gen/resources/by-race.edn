@@ -1,0 +1,39 @@
+{:human     {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
+ :night_elf {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :rogue :druid :monk :mage :priest}}
+ :dwarf     {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :paladin :hunter :shaman :rogue :monk :mage :warlock :priest}}
+ :gnome     {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :rogue :monk :mage :warlock :priest}}
+ :draenei   {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :paladin :hunter :shaman :monk :mage :priest}}
+ :worgen    {:factions #{:alliance}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :druid :rogue :mage :warlock :priest}}
+ :pandaren  {:factions #{:alliance :horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :shaman :rogue :monk :mage :priest}}
+ :orc       {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :shaman :rogue :monk :mage :warlock}}
+ :troll     {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :shaman :druid :rogue :monk :mage :warlock :priest}}
+ :forsaken  {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :rogue :monk :mage :warlock :priest}}
+ :tauren    {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :paladin :hunter :shaman :druid :monk :priest}}
+ :blood_elf {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :paladin :hunter :rogue :monk :mage :warlock :priest}}
+ :goblin    {:factions #{:horde}
+             :genders  #{:female :male}
+             :classes  #{:warrior :hunter :shaman :rogue :mage :warlock :priest}}}
