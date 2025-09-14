@@ -7,8 +7,11 @@
 #include <format>
 #include <array>
 
+// gender
+
 namespace gender {
   enum class Gender { female, male, };
+
   const auto genders { std::to_array({ Gender::female, Gender::male }) };
 
   constexpr std::string to_string(const Gender& g) {
@@ -40,22 +43,43 @@ namespace std {
   };
 };
 
+// faction
+
 namespace faction {
   enum class Faction { alliance, horde, };
-  const std::vector<Faction> factions = { Faction::alliance, Faction::horde };
-  const std::string to_string(const Faction &f)
-  {
+
+  constexpr auto factions { std::to_array({ Faction::alliance, Faction::horde }) };
+
+  const std::string to_string(const Faction &f) {
     switch (f) {
     case Faction::alliance: return "alliance";
     case Faction::horde:    return "horde";
-    default:                return "dunno";
     }
   }
-  std::ostream& operator<<(std::ostream& o, const Faction& f)
-  {
+
+  std::ostream& operator<<(std::ostream& o, const Faction& f) {
     return o << to_string(f);
   }
 };
+
+namespace std {
+  using faction::Faction;
+  using faction::to_string;
+
+  template <>
+  struct std::formatter<Faction> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+      return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const Faction& f, FormatContext& ctx) const {
+      return std::format_to(ctx.out(), "{}", to_string(f));
+    }
+  };
+};
+
+// race
 
 namespace race {
   enum class Race {
