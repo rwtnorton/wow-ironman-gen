@@ -6,6 +6,7 @@
 #include <print>
 #include <format>
 #include <array>
+#include <ranges>
 
 // gender
 
@@ -148,11 +149,12 @@ namespace std {
 
 namespace wowclass {
   enum class WowClass {
-    warrior, hunter, shaman, druid, rogue, monk, mage, warlock, priest,
+    warrior, paladin, hunter, shaman, druid, rogue, monk, mage, warlock, priest,
   };
 
   constexpr auto wowclasses { std::to_array({
     WowClass::warrior,
+    WowClass::paladin,
     WowClass::hunter,
     WowClass::shaman,
     WowClass::druid,
@@ -166,6 +168,7 @@ namespace wowclass {
   const std::string to_string(const WowClass& c) {
     switch (c) {
     case WowClass::warrior: return "warrior";
+    case WowClass::paladin: return "paladin";
     case WowClass::hunter:  return "hunter";
     case WowClass::shaman:  return "shaman";
     case WowClass::druid:   return "druid";
@@ -215,6 +218,34 @@ namespace std {
     goblin => [qw[warrior hunter shaman rogue mage warlock priest]],
 */
 
+template <std::ranges::random_access_range R>
+const
+std::unordered_map<
+  race::Race, R
+> wowclasses_for_race {
+   {race::Race::human, std::to_array({ wowclass::WowClass::warrior })},
+};
+
+constexpr auto by_race(race::Race r) {
+  using enum race::Race;
+  using enum wowclass::WowClass;
+  switch (r) {
+  case human:     return std::vector { warrior, paladin, hunter, rogue, monk, mage, warlock, priest, };
+  case night_elf: return std::vector { warrior, hunter, rogue, druid, monk, mage, priest, };
+  case dwarf:     return std::vector { warrior, paladin, hunter, shaman, rogue, monk, mage, warlock, priest, };
+  case gnome:     return std::vector { warrior, rogue, monk, mage, warlock, priest, };
+  case draenei:   return std::vector { warrior, paladin, hunter, shaman, monk, mage, priest, };
+  case worgen:    return std::vector { warrior, hunter, druid, rogue, mage, warlock, priest, };
+  case pandaren:  return std::vector { warrior, hunter, shaman, rogue, monk, mage, priest, };
+  case orc:       return std::vector { warrior, hunter, shaman, rogue, monk, mage, warlock, };
+  case troll:     return std::vector { warrior, hunter, shaman, druid, rogue, monk, mage, warlock, priest, };
+  case forsaken:  return std::vector { warrior, hunter, rogue, monk, mage, warlock, priest, };
+  case tauren:    return std::vector { warrior, paladin, hunter, shaman, druid, monk, priest, };
+  case blood_elf: return std::vector { warrior, paladin, hunter, rogue, monk, mage, warlock, priest, };
+  case goblin:    return std::vector { warrior, hunter, shaman, rogue, mage, warlock, priest, };
+  }
+}
+
 int main() {
   using gender::Gender;
   std::println("{}", gender::to_string(Gender::female));
@@ -245,6 +276,15 @@ int main() {
   std::println("== WowClasses:");
   for (auto& c : wowclass::wowclasses) {
     std::println("{}", c);
+  }
+
+  using race::Race;
+  std::println("wowclasses for humans:");
+  // for (auto& c : wowclasses_for_race<std::ranges::random_access_range<Race::human>>[Race::human]) {
+  //   println("{}", c);
+  // }
+  for (auto& wc : by_race(Race::human)) {
+    std::println("- {}", wc);
   }
 
   return 0;
