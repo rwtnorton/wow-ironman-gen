@@ -215,28 +215,36 @@ namespace std {
     goblin => [qw[warrior hunter shaman rogue mage warlock priest]],
 */
 
-int main()
-{
+int main() {
   using gender::Gender;
   std::println("{}", gender::to_string(Gender::female));
   std::println("{}", Gender::female);
   // std::println(Gender::female);
 
-  std::cout << Gender::female << '\n';
-  std::cout << Gender::male << '\n';
+  std::println("== Genders:");
+
+  std::println("{}", Gender::female);
+  std::println("{}", Gender::male);
   for (int i = 0; i < gender::genders.size(); i++) {
-    std::cout << i << ": " << gender::genders[i] << '\n';
+    std::println("{}: {}", i, gender::genders[i]);
   }
-  std::cout << faction::Faction::alliance << '\n';
-  std::cout << faction::Faction::horde << '\n';
+
+  using faction::Faction;
+  std::println("== Factions:");
+  std::println("{}", Faction::alliance);
+  std::println("{}", Faction::horde);
   for (auto& f : faction::factions) {
-    std::cout << f << '\n';
+    std::println("{}", f);
   }
+
+  std::println("== Races:");
   for (auto& r : race::races) {
-    std::cout << r << '\n';
+    std::println("{}", r);
   }
+
+  std::println("== WowClasses:");
   for (auto& c : wowclass::wowclasses) {
-    std::cout << c << '\n';
+    std::println("{}", c);
   }
 
   return 0;
