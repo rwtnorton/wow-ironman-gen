@@ -3,21 +3,42 @@
 #include <vector>
 #include <random>
 #include <string>
+#include <print>
+#include <format>
+#include <array>
 
 namespace gender {
   enum class Gender { female, male, };
-  const std::vector<Gender> genders = { Gender::female, Gender::male };
-  const std::string to_string(const Gender& g)
-  {
+  const auto genders = std::to_array({ Gender::female, Gender::male });
+
+  constexpr std::string to_string(const Gender& g) {
     switch (g) {
     case Gender::female: return "female";
     case Gender::male:   return "male";
     default:             return "dunno";
     }
   }
+
   std::ostream& operator<<(std::ostream& o, const Gender& g) {
     return o << to_string(g);
   }
+};
+
+namespace std {
+  using gender::Gender;
+  using gender::to_string;
+
+  template <>
+  struct std::formatter<Gender> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+      return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const Gender& g, FormatContext& ctx) const {
+      return std::format_to(ctx.out(), "{}", to_string(g));
+    }
+  };
 };
 
 namespace faction {
@@ -137,8 +158,13 @@ namespace wowclass {
 
 int main()
 {
-  std::cout << gender::Gender::female << '\n';
-  std::cout << gender::Gender::male << '\n';
+  using gender::Gender;
+  std::println("{}", gender::to_string(Gender::female));
+  std::println("{}", Gender::female);
+  // std::println(Gender::female);
+
+  std::cout << Gender::female << '\n';
+  std::cout << Gender::male << '\n';
   for (int i = 0; i < gender::genders.size(); i++) {
     std::cout << i << ": " << gender::genders[i] << '\n';
   }
@@ -153,5 +179,6 @@ int main()
   for (auto& c : wowclass::wowclasses) {
     std::cout << c << '\n';
   }
+
   return 0;
 }
