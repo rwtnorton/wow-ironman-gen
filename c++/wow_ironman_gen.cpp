@@ -9,13 +9,12 @@
 
 namespace gender {
   enum class Gender { female, male, };
-  const auto genders = std::to_array({ Gender::female, Gender::male });
+  const auto genders { std::to_array({ Gender::female, Gender::male }) };
 
   constexpr std::string to_string(const Gender& g) {
     switch (g) {
     case Gender::female: return "female";
     case Gender::male:   return "male";
-    default:             return "dunno";
     }
   }
 
