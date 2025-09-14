@@ -150,7 +150,8 @@ namespace wowclass {
   enum class WowClass {
     warrior, hunter, shaman, druid, rogue, monk, mage, warlock, priest,
   };
-  const std::vector<WowClass> wowclasses = {
+
+  constexpr auto wowclasses { std::to_array({
     WowClass::warrior,
     WowClass::hunter,
     WowClass::shaman,
@@ -160,9 +161,9 @@ namespace wowclass {
     WowClass::mage,
     WowClass::warlock,
     WowClass::priest,
-  };
-  const std::string to_string(const WowClass& c)
-  {
+  }) };
+
+  const std::string to_string(const WowClass& c) {
     switch (c) {
     case WowClass::warrior: return "warrior";
     case WowClass::hunter:  return "hunter";
@@ -173,13 +174,29 @@ namespace wowclass {
     case WowClass::mage:    return "mage";
     case WowClass::warlock: return "warlock";
     case WowClass::priest:  return "priest";
-    default:                return "dunno";
     }
   }
-  std::ostream& operator<<(std::ostream& o, const WowClass& c)
-  {
+
+  std::ostream& operator<<(std::ostream& o, const WowClass& c) {
     return o << to_string(c);
   }
+};
+
+namespace std {
+  using wowclass::WowClass;
+  using wowclass::to_string;
+
+  template <>
+  struct std::formatter<WowClass> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+      return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const WowClass& w, FormatContext& ctx) const {
+      return std::format_to(ctx.out(), "{}", to_string(w));
+    }
+  };
 };
 
 /*
