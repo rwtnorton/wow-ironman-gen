@@ -87,7 +87,8 @@ namespace race {
     pandaren,
     orc, troll, forsaken, tauren, blood_elf, goblin,
   };
-  const std::vector<Race> races = {
+
+  constexpr auto races { std::to_array({
     Race::human,
     Race::night_elf,
     Race::dwarf,
@@ -101,9 +102,9 @@ namespace race {
     Race::tauren,
     Race::blood_elf,
     Race::goblin,
-  };
-  const std::string to_string(const Race &r)
-  {
+  }) };
+
+  const std::string to_string(const Race &r) {
     switch (r) {
     case Race::human:       return "human";
     case Race::night_elf:   return "night_elf";
@@ -118,14 +119,32 @@ namespace race {
     case Race::tauren:      return "tauren";
     case Race::blood_elf:   return "blood_elf";
     case Race::goblin:      return "goblin";
-    default:                return "dunno";
     }
   }
-  std::ostream& operator<<(std::ostream& o, const Race& r)
-  {
+
+  std::ostream& operator<<(std::ostream& o, const Race& r) {
     return o << to_string(r);
   }
 };
+
+namespace std {
+  using race::Race;
+  using race::to_string;
+
+  template <>
+  struct std::formatter<Race> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+      return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const Race& r, FormatContext& ctx) const {
+      return std::format_to(ctx.out(), "{}", to_string(r));
+    }
+  };
+};
+
+// wowclass
 
 namespace wowclass {
   enum class WowClass {
