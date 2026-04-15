@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -eu
+cd "$(dirname $0)"
+exec sqlite3 wowironmangen.db 00-init.sql

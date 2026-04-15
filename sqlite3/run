@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -eu
+cd "$(dirname $0)"
+exec sqlite3 -noheader -list -- wowironmangen.db < gen_toon.sql
