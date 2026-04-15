@@ -2,5 +2,5 @@
 set -eu
 cd "$(dirname $0)"
 if [ -e wowironmangen.db ]; then
-    exec rm wowironmangen.db
+    rm wowironmangen.db
 fi
