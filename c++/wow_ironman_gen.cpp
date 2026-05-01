@@ -7,6 +7,7 @@
 #include <format>
 #include <array>
 #include <ranges>
+#include <algorithm>
 
 // gender
 
@@ -285,6 +286,18 @@ int main() {
   // }
   for (auto& wc : by_race(Race::human)) {
     std::println("- {}", wc);
+  }
+
+  {
+      std::println("== sampling races:");
+      std::random_device seeder;
+      std::default_random_engine rand_gen { seeder() };
+      for (int i = 0; i < 5; ++i) {
+          std::vector<race::Race> got(1);
+          std::sample(std::cbegin(race::races), std::cend(race::races),
+                  std::begin(got), std::size(got), rand_gen);
+          std::println("{:d}: {:n}", i, got);
+      }
   }
 
   return 0;
