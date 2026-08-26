@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WowIronmanGen.Tests/WowIronmanGen.Tests.csproj" />
+  <Project Path="WowIronmanGen/WowIronmanGen.csproj" />
+</Solution>
