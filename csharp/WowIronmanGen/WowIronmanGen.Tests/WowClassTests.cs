@@ -17,5 +17,6 @@ public sealed class WowClassTests
         var got = EnumSampler<WowClass>.Sample(random);
         Assert.AreEqual(WowClass.Monk, got);
         Assert.AreEqual(WowClass.Paladin, EnumSampler<WowClass>.Sample(random));
+        Assert.IsInstanceOfType<WowClass>(EnumSampler<WowClass>.Sample());
     }
 }
