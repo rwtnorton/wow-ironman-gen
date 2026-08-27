@@ -13,3 +13,7 @@ var pandaFaction = FactionAligner.SampleByRace(Race.Pandaren);
 Console.WriteLine($"pandaren faction 1: {pandaFaction.ToFactionString()}");
 Console.WriteLine($"pandaren faction 2: {FactionAligner.SampleByRace(Race.Pandaren).ToFactionString()}");
 Console.WriteLine($"pandaren faction 3: {FactionAligner.SampleByRace(Race.Pandaren).ToFactionString()}");
+
+Console.WriteLine($"tauren class 1: {WowClassAligner.SampleByRace(Race.Tauren)}");
+Console.WriteLine($"tauren class 2: {WowClassAligner.SampleByRace(Race.Tauren)}");
+Console.WriteLine($"tauren class 3: {WowClassAligner.SampleByRace(Race.Tauren)}");
