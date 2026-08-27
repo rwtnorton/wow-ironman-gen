@@ -1,13 +1,19 @@
 ﻿using WowIronmanGen;
 
+var random = GetRandom();
+
+// ScratchPad();
+var toon = Toon.Generate(random);
+Console.WriteLine(toon.ToDisplayString());
+Environment.Exit(0);
+
 Random GetRandom()
 {
     var seedStr = Environment.GetEnvironmentVariable("wowironmangen_seed") ?? "";
     return int.TryParse(seedStr, out var seed) ? new Random(seed) : new Random();
 }
 
-var random = GetRandom();
-
+/*
 void ScratchPad()
 {
     var wowClass = EnumSampler<WowClass>.Sample(random);
@@ -37,5 +43,4 @@ void ScratchPad()
     Console.WriteLine($"generated toon 2: {Toon.Generate(random).ToDisplayString()}");
     Console.WriteLine($"generated toon 3: {Toon.Generate(random).ToDisplayString()}");
 }
-
-ScratchPad();
+*/
