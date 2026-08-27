@@ -4,11 +4,11 @@ namespace WowIronmanGen.Tests;
 public sealed class RaceTests
 {
     [TestMethod]
-    public void TestToRaceString()
+    public void TestToDisplayString()
     {
-        Assert.AreEqual("human", Race.Human.ToRaceString());
-        Assert.AreEqual("night_elf", Race.NightElf.ToRaceString());
-        Assert.AreEqual("blood_elf", Race.BloodElf.ToRaceString());
+        Assert.AreEqual("human", Race.Human.ToDisplayString());
+        Assert.AreEqual("night_elf", Race.NightElf.ToDisplayString());
+        Assert.AreEqual("blood_elf", Race.BloodElf.ToDisplayString());
     }
 
     [TestMethod]

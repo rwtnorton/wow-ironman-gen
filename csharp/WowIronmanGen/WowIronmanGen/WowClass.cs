@@ -1,4 +1,5 @@
 namespace WowIronmanGen;
+
 public enum WowClass
 {
     Warrior,
@@ -10,12 +11,12 @@ public enum WowClass
     Monk,
     Mage,
     Warlock,
-    Priest,
+    Priest
 }
 
 public static class WowClassExtensions
 {
-    public static string ToClassString(this WowClass wowClass)
+    public static string ToDisplayString(this WowClass wowClass)
     {
         return wowClass.ToString().ToLower();
     }

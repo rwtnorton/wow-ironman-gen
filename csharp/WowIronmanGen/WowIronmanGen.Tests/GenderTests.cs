@@ -4,10 +4,10 @@ namespace WowIronmanGen.Tests;
 public class GenderTests
 {
     [TestMethod]
-    public void TestToGenderString()
+    public void TestTodDisplayString()
     {
-        Assert.AreEqual("female", Gender.Female.ToGenderString());
-        Assert.AreEqual("male", Gender.Male.ToGenderString());
+        Assert.AreEqual("female", Gender.Female.ToDisplayString());
+        Assert.AreEqual("male", Gender.Male.ToDisplayString());
     }
 
     [TestMethod]

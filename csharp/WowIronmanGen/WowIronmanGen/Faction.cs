@@ -8,7 +8,7 @@ public enum Faction
 
 public static class FactionExtensions
 {
-    public static string ToFactionString(this Faction faction)
+    public static string ToDisplayString(this Faction faction)
     {
         return faction.ToString().ToLower();
     }

@@ -4,10 +4,10 @@ namespace WowIronmanGen.Tests;
 public class FactionTests
 {
     [TestMethod]
-    public void TestToFactionString()
+    public void TestToDisplayString()
     {
-        Assert.AreEqual("alliance", Faction.Alliance.ToFactionString());
-        Assert.AreEqual("horde", Faction.Horde.ToFactionString());
+        Assert.AreEqual("alliance", Faction.Alliance.ToDisplayString());
+        Assert.AreEqual("horde", Faction.Horde.ToDisplayString());
     }
 
     [TestMethod]

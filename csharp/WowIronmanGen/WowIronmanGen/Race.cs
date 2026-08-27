@@ -19,7 +19,7 @@ public enum Race
 
 public static class RaceExtensions
 {
-    public static string ToRaceString(this Race race)
+    public static string ToDisplayString(this Race race)
     {
         return race switch
         {

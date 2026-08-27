@@ -8,7 +8,7 @@ public enum Gender
 
 public static class GenderExtensions
 {
-    public static string ToGenderString(this Gender gender)
+    public static string ToDisplayString(this Gender gender)
     {
         return gender.ToString().ToLower();
     }

@@ -4,10 +4,10 @@
 public sealed class WowClassTests
 {
     [TestMethod]
-    public void TestToClassString()
+    public void TestToDisplayString()
     {
-        Assert.AreEqual("warrior", WowClass.Warrior.ToClassString());
-        Assert.AreEqual("mage", WowClass.Mage.ToClassString());
+        Assert.AreEqual("warrior", WowClass.Warrior.ToDisplayString());
+        Assert.AreEqual("mage", WowClass.Mage.ToDisplayString());
     }
 
     [TestMethod]
