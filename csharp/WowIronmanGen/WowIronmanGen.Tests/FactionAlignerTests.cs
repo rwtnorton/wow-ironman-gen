@@ -4,13 +4,13 @@ namespace WowIronmanGen.Tests;
 public class FactionAlignerTests
 {
     [TestMethod]
-    public void TestIsValid()
+    public void TestIsAligned()
     {
-        Assert.IsTrue(FactionAligner.IsValid(Race.Human, Faction.Alliance));
-        Assert.IsFalse(FactionAligner.IsValid(Race.Orc, Faction.Alliance));
-        Assert.IsTrue(FactionAligner.IsValid(Race.Orc, Faction.Horde));
-        Assert.IsTrue(FactionAligner.IsValid(Race.Pandaren, Faction.Alliance));
-        Assert.IsTrue(FactionAligner.IsValid(Race.Pandaren, Faction.Horde));
+        Assert.IsTrue(FactionAligner.IsAligned(Race.Human, Faction.Alliance));
+        Assert.IsFalse(FactionAligner.IsAligned(Race.Orc, Faction.Alliance));
+        Assert.IsTrue(FactionAligner.IsAligned(Race.Orc, Faction.Horde));
+        Assert.IsTrue(FactionAligner.IsAligned(Race.Pandaren, Faction.Alliance));
+        Assert.IsTrue(FactionAligner.IsAligned(Race.Pandaren, Faction.Horde));
     }
 
     [TestMethod]

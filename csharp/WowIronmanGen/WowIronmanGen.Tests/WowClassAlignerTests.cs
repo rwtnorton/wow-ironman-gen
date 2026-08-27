@@ -4,14 +4,14 @@ namespace WowIronmanGen.Tests;
 public class WowClassAlignerTests
 {
     [TestMethod]
-    public void IsValidTests()
+    public void TestIsAligned()
     {
-        Assert.IsTrue(WowClassAligner.IsValid(Race.Human, WowClass.Paladin));
-        Assert.IsFalse(WowClassAligner.IsValid(Race.Human, WowClass.Druid));
+        Assert.IsTrue(WowClassAligner.IsAligned(Race.Human, WowClass.Paladin));
+        Assert.IsFalse(WowClassAligner.IsAligned(Race.Human, WowClass.Druid));
     }
 
     [TestMethod]
-    public void SampleByRaceTests()
+    public void TestSampleByRace()
     {
         Random random = new(42);
         Assert.AreEqual(WowClass.Monk, WowClassAligner.SampleByRace(Race.NightElf, random));

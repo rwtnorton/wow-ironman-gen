@@ -73,10 +73,9 @@ public static class WowClassAligner
         ]
     };
 
-    public static bool IsValid(Race race, WowClass wowClass)
+    public static bool IsAligned(Race race, WowClass wowClass)
     {
-        var allowed = byRace[race];
-        return allowed.Contains(wowClass);
+        return byRace[race].Contains(wowClass);
     }
 
     public static WowClass SampleByRace(Race race, Random? random = null)

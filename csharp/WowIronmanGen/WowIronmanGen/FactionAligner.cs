@@ -23,7 +23,7 @@ public static class FactionAligner
         [Race.Goblin] = hordeOnly
     };
 
-    public static bool IsValid(Race race, Faction faction)
+    public static bool IsAligned(Race race, Faction faction)
     {
         var allowed = byRace[race];
         return allowed.Contains(faction);
@@ -32,8 +32,7 @@ public static class FactionAligner
     public static Faction SampleByRace(Race race, Random? random = null)
     {
         var factions = byRace[race];
-        return factions.Length == 1
-            ? factions[0]
-            : factions[(random ?? new Random()).Next(factions.Length)];
+        var index = factions.Length == 1 ? 0 : (random ?? new Random()).Next(factions.Length);
+        return factions[index];
     }
 }
