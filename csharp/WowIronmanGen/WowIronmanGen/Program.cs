@@ -1,16 +1,34 @@
-﻿using WowIronmanGen;
+﻿namespace WowIronmanGen;
 
-var random = GetRandom();
-
-// ScratchPad();
-var toon = Toon.Generate(random);
-Console.WriteLine(toon.ToDisplayString());
-Environment.Exit(0);
-
-Random GetRandom()
+internal class Program
 {
-    var seedStr = Environment.GetEnvironmentVariable("wowironmangen_seed") ?? "";
-    return int.TryParse(seedStr, out var seed) ? new Random(seed) : new Random();
+    private static void Main(string[] args)
+    {
+        var random = GetRandom();
+        var iters = GetIterations(args);
+
+        // ScratchPad();
+        for (var i = 0; i < iters; ++i)
+        {
+            var toon = Toon.Generate(random);
+            Console.WriteLine(toon.ToDisplayString());
+        }
+
+        Environment.Exit(0);
+    }
+
+    private static Random GetRandom()
+    {
+        var seedStr = Environment.GetEnvironmentVariable("wowironmangen_seed") ?? "";
+        return int.TryParse(seedStr, out var seed) ? new Random(seed) : new Random();
+    }
+
+    private static int GetIterations(string[] args)
+    {
+        if (args.Length >= 1 && int.TryParse(args[0], out var iters) && iters >= 1) return iters;
+
+        return 1;
+    }
 }
 
 /*
