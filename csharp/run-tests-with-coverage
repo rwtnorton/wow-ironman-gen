@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu
+
+cd "$(dirname $0)/WowIronmanGen/WowIronmanGen.Tests"
+dotnet test --collect:'Xplat Code Coverage'
+reportgenerator -reports:"**/TestResults/**/coverage.cobertura.xml" -targetdir:"CoverageReport" -reporttypes:Html
+open CoverageReport/index.html

@@ -1,4 +1,5 @@
 bin/
 obj/
 TestResults/
+CoverageReport/
 WowIronmanGen.sln.DotSettings.user
