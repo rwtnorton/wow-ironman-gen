@@ -20,7 +20,7 @@ public class ToonTests
     }
 
     [TestMethod]
-    public void TestIsDisplayString()
+    public void TestToDisplayString()
     {
         // Non-Pandarens should not bother with faction info.
         var orcWarrior = new Toon(Race.Orc, WowClass.Warrior, Gender.Female, Faction.Horde);
